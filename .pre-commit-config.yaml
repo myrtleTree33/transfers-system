@@ -3,36 +3,16 @@ default_stages: [commit]
 fail_fast: true
 
 repos:
-  # - repo: https://github.com/tekwizely/pre-commit-golang
-  #   rev: v1.0.0-rc.1
-  #   hooks:
-
-  #     - id: go-mod-tidy-repo
-  #       name: Go - Check go.mod Status
-  #       files: backend
-
-  #     - id: my-cmd-mod
-  #       name: Go - Generate
-  #       args: [go, generate, ./...]
-
-  #     - id: go-build-mod
-  #       name: Go - Check Build Status
-
-  #     - id: go-test-mod
-  #       name: Go - Run unit tests
-
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.15.0
+    rev: v3.27.0
     hooks:
       - id: commitizen
         stages: [commit-msg]
 
-  # - repo: local
-  #   hooks:
-  #     - id: golangci-lint
-  #       name: golangci-lint
-  #       entry: bash -c "cd ./backend && golangci-lint run --new-from-rev HEAD --fix"
-  #       types: [go]
-  #       language: golang
-  #       require_serial: true
-  #       pass_filenames: false
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
