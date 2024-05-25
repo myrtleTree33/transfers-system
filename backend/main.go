@@ -3,6 +3,7 @@ package main
 import (
 	"backend/internal/app"
 	"backend/internal/controllers"
+	"backend/internal/controllers/accounts_routes"
 	"backend/internal/middleware"
 	"backend/internal/sdkhttp"
 	"backend/internal/services"
@@ -109,6 +110,15 @@ func initHandler(server *sdkhttp.IServer) *gin.Engine {
 	{
 		// Heartbeat
 		v1.GET("/", controllers.Pong)
+
+		// Partner routes
+		accounts := v1.Group("/accounts")
+		{
+
+			accounts.POST("/",
+				accounts_routes.CreateAccountByID,
+			)
+		}
 	}
 
 	// spawn swagger ui
