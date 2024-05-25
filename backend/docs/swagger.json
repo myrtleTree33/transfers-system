@@ -1,0 +1,2829 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is an http-request collection of Tupertino.",
+        "title": "Tupertino",
+        "contact": {},
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "paths": {
+        "/v1/organisations": {
+            "post": {
+                "security": [
+                    {
+                        "Authorization": []
+                    },
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "creates an organisation",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisations"
+                ],
+                "summary": "Creates an organisation",
+                "parameters": [
+                    {
+                        "description": "payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateOrganisationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateOrganisationReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateOrganisationReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "get an organisation",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisations"
+                ],
+                "summary": "Get an organisation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "deletes an organisation",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisations"
+                ],
+                "summary": "Deletes an organisation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.RemoveOrganisationReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.RemoveOrganisationReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/invitations": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation invitations"
+                ],
+                "summary": "Gets organisation's invitations",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationInvitationsReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationInvitationsReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation invitations"
+                ],
+                "summary": "Creates and sends an organisation's invitation",
+                "parameters": [
+                    {
+                        "description": "payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateOrganisationInvitationRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateOrganisationInvitationReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateOrganisationInvitationReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/invitations/{invitation_id}": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation invitations"
+                ],
+                "summary": "Gets an organisation's invitation by invitation id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Invitation's ID",
+                        "name": "invitation_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationInvitationsReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationInvitationsReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation invitations"
+                ],
+                "summary": "Deletes organisation's invitations",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "invitation_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteOrganisationInvitationByIDReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteOrganisationInvitationByIDReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/invitations/{invitation_id}/accept": {
+            "post": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation invitations"
+                ],
+                "summary": "Accept organisation's invitations",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "invitation_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AcceptOrganisationInvitationByIDReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AcceptOrganisationInvitationByIDReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/payment_methods": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation payment method"
+                ],
+                "summary": "Get an organisation's payment-methods",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationPaymentMethodsReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationPaymentMethodsReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/payment_methods/{payment_method_id}": {
+            "post": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation payment method"
+                ],
+                "summary": "Assign payment-method to a single organisation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Payment-method's Id",
+                        "name": "payment_method_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AssignPaymentMethodToOrganisationReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AssignPaymentMethodToOrganisationReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation payment method"
+                ],
+                "summary": "Deletes a single payment-method of an organisation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Payment-method's Id",
+                        "name": "payment_method_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteOrganisationPaymentMethodReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteOrganisationPaymentMethodReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/secret-keys": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation secret keys"
+                ],
+                "summary": "Gets organisation's secret-keys",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationSecretKeysReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationSecretKeysReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation secret keys"
+                ],
+                "summary": "Creates organisation's secret-key",
+                "parameters": [
+                    {
+                        "description": "payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateOrganisationSecretKeyRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateOrganisationSecretKeyReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateOrganisationSecretKeyReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/secret-keys/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation secret keys"
+                ],
+                "summary": "Gets organisation's secret-key by secret-key's id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Secret-key's ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationSecretKeyByIDReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationSecretKeyByIDReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation secret keys"
+                ],
+                "summary": "Deletes organisation's secret-key by secret-key's id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Secret-key's ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteOneOrganisationSecretKeyByIDReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteOneOrganisationSecretKeyByIDReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/suborganisations": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Suborganisations"
+                ],
+                "summary": "Gets organisation's sub-organisations by parent-organisation's id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetSuborganisationsReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetSuborganisationsReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Suborganisations"
+                ],
+                "summary": "Adds organisation's sub-organisation by organisation's id",
+                "parameters": [
+                    {
+                        "description": "payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AddSuborganisationByIDRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AddSuborganisationByIDReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AddSuborganisationByIDReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/users": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "gets an organisation's users",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisations"
+                ],
+                "summary": "Gets an organisation's users",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationUsersReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationUsersReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/users/{user_id}": {
+            "post": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "adds a user to an organisation",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisations"
+                ],
+                "summary": "Adds a user to an organisation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AddOrganisationUserReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AddOrganisationUserReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "deletes a user from an organisation",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisations"
+                ],
+                "summary": "Delete a user from an organisation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteOrganisationUserReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteOrganisationUserReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/users/{user_id}/roles": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation user roles"
+                ],
+                "summary": "Get roles of a user of an organisation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationUserRolesReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetOrganisationUserRolesReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation user roles"
+                ],
+                "summary": "Add roles to a user of an organisation",
+                "parameters": [
+                    {
+                        "description": "payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AddOrganisationUserRolesRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AddOrganisationUserRolesReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AddOrganisationUserRolesReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Organisation user roles"
+                ],
+                "summary": "Delete roles of a user of an organisation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteOrganisationUserRolesRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteOrganisationUserRolesReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteOrganisationUserRolesReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/webhook-token": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "Get organisation's webhook-token",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Webhooks"
+                ],
+                "summary": "Get organisation's webhook-token",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetWebhookTokenReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetWebhookTokenReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/organisations/{org_id}/webhooks": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "Get webhook configurations by organisation's id",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Webhooks"
+                ],
+                "summary": "Get webhooks by org's id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetWebhooksReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetWebhooksReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "Create a webhook configuration",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Webhooks"
+                ],
+                "summary": "Create webhook",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Organisation's ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateWebhookRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateWebhookReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateWebhookReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/partners/{code}": {
+            "post": {
+                "description": "get partner data by code",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Partners"
+                ],
+                "summary": "Get partner data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "API key",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "partner code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetPartnerByCodeResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetPartnerByCodeResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/v1/password-resets/accept": {
+            "post": {
+                "description": "proceeds reset password attempts",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Password resets"
+                ],
+                "summary": "Confirm reset password request",
+                "parameters": [
+                    {
+                        "description": "reset password details",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AcceptResetPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AcceptResetPasswordReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AcceptResetPasswordReply"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/password-resets/generate": {
+            "post": {
+                "description": "triggers reset password generator",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Password resets"
+                ],
+                "summary": "Generate reset password request",
+                "parameters": [
+                    {
+                        "description": "reset password details",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GenerateResetPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GenerateResetPasswordReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GenerateResetPasswordReply"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/ping": {
+            "get": {
+                "description": "Ping handler",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Ping handler",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.PongResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/users": {
+            "post": {
+                "description": "Creates a user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create user",
+                "parameters": [
+                    {
+                        "description": "new user details",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateUserReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.CreateUserReply"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/users/current": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "get current user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get current user",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetCurrentUserReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetCurrentUserReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "update current user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update current user",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.UpdateCurrentUserReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.UpdateCurrentUserReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/users/login": {
+            "post": {
+                "description": "Do login",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Login user",
+                "parameters": [
+                    {
+                        "description": "login details",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.LoginUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.LoginUserReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.LoginUserReply"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/users/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "get a single user by user's id",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User's ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetUserReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetUserReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/v1/webhooks/{webhook_id}": {
+            "get": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "Get a webhook configuration by webhook id",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Webhooks"
+                ],
+                "summary": "Get webhook by webhook id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Webhook's ID",
+                        "name": "webhook_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetWebhookReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.GetWebhookReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "Update a webhook configuration by webhook's id",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Webhooks"
+                ],
+                "summary": "Update webhook",
+                "parameters": [
+                    {
+                        "description": "payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.UpdateWebhookRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Webhook's ID",
+                        "name": "webhook_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.UpdateWebhookReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.UpdateWebhookReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
+                "description": "Delete a webhook configuration by webhook's id",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Webhooks"
+                ],
+                "summary": "Delete a webhook",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Webhook's ID",
+                        "name": "webhook_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteWebhookReply"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.DeleteWebhookReply"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controllers.AcceptOrganisationInvitationByIDReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.AcceptResetPasswordReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.AcceptResetPasswordRequest": {
+            "type": "object",
+            "required": [
+                "new_password",
+                "token"
+            ],
+            "properties": {
+                "new_password": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.AddOrganisationUserReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.AddOrganisationUserRolesReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.UserRoleType"
+                    }
+                }
+            }
+        },
+        "controllers.AddOrganisationUserRolesRequest": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.UserRoleType"
+                    }
+                }
+            }
+        },
+        "controllers.AddSuborganisationByIDReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.AddSuborganisationByIDRequest": {
+            "type": "object"
+        },
+        "controllers.AssignPaymentMethodToOrganisationReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.CreateOrganisationInvitationReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "organisation_invitation": {
+                    "$ref": "#/definitions/models.OrganisationInvitation"
+                }
+            }
+        },
+        "controllers.CreateOrganisationInvitationRequest": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.CreateOrganisationReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "organisation": {
+                    "$ref": "#/definitions/models.Organisation"
+                }
+            }
+        },
+        "controllers.CreateOrganisationRequest": {
+            "type": "object",
+            "required": [
+                "address",
+                "company_registered_date",
+                "country_code",
+                "email",
+                "name",
+                "phone",
+                "type"
+            ],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "company_registered_date": {
+                    "type": "string"
+                },
+                "country_code": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "parent_organisation_id": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/models.CompanyType"
+                }
+            }
+        },
+        "controllers.CreateOrganisationSecretKeyReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "organisation_secret_key": {
+                    "$ref": "#/definitions/models.OrganisationSecretKey"
+                }
+            }
+        },
+        "controllers.CreateOrganisationSecretKeyRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "permissions"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "permissions": {
+                    "$ref": "#/definitions/models.ApiPermissions"
+                }
+            }
+        },
+        "controllers.CreateUserReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.User"
+                }
+            }
+        },
+        "controllers.CreateUserRequest": {
+            "type": "object",
+            "required": [
+                "email",
+                "first_name",
+                "last_name",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.CreateWebhookReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "webhook": {
+                    "$ref": "#/definitions/models.Webhook"
+                },
+                "webhook_subscribed_events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.WebhookEvent"
+                    }
+                }
+            }
+        },
+        "controllers.CreateWebhookRequest": {
+            "type": "object",
+            "properties": {
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.WebhookEvent"
+                    }
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.DeleteOneOrganisationSecretKeyByIDReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.DeleteOrganisationInvitationByIDReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.DeleteOrganisationPaymentMethodReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.DeleteOrganisationUserReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.DeleteOrganisationUserRolesReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.DeleteOrganisationUserRolesRequest": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.UserRoleType"
+                    }
+                }
+            }
+        },
+        "controllers.DeleteWebhookReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.GenerateResetPasswordReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.GenerateResetPasswordRequest": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.GetCurrentUserReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.User"
+                }
+            }
+        },
+        "controllers.GetOrganisationInvitationsReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.GetOrganisationPaymentMethodsReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "payment_methods": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.PaymentMethod"
+                    }
+                }
+            }
+        },
+        "controllers.GetOrganisationReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "organisation": {
+                    "$ref": "#/definitions/models.Organisation"
+                }
+            }
+        },
+        "controllers.GetOrganisationSecretKeyByIDReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "organisation_secret_key": {
+                    "$ref": "#/definitions/models.OrganisationSecretKey"
+                }
+            }
+        },
+        "controllers.GetOrganisationSecretKeysReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "organisation_secret_keys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.OrganisationSecretKey"
+                    }
+                }
+            }
+        },
+        "controllers.GetOrganisationUserRolesReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.UserRoleType"
+                    }
+                }
+            }
+        },
+        "controllers.GetOrganisationUsersReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.User"
+                    }
+                }
+            }
+        },
+        "controllers.GetPartnerByCodeResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/models.Partner"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.GetSuborganisationsReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "suborganisations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Organisation"
+                    }
+                }
+            }
+        },
+        "controllers.GetUserReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.User"
+                }
+            }
+        },
+        "controllers.GetWebhookReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "webhook": {
+                    "$ref": "#/definitions/models.Webhook"
+                }
+            }
+        },
+        "controllers.GetWebhookTokenReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "webhook_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.GetWebhooksReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "webhooks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Webhook"
+                    }
+                }
+            }
+        },
+        "controllers.LoginUserReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.User"
+                }
+            }
+        },
+        "controllers.LoginUserRequest": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.PongResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "controllers.RemoveOrganisationReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.UpdateCurrentUserReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.User"
+                }
+            }
+        },
+        "controllers.UpdateWebhookReply": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "controllers.UpdateWebhookRequest": {
+            "type": "object",
+            "properties": {
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.WebhookEvent"
+                    }
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ApiPermissions": {
+            "type": "object",
+            "properties": {
+                "payments": {
+                    "$ref": "#/definitions/models.PermissionsAccessType"
+                },
+                "reports": {
+                    "$ref": "#/definitions/models.PermissionsAccessType"
+                },
+                "users": {
+                    "$ref": "#/definitions/models.PermissionsAccessType"
+                }
+            }
+        },
+        "models.CompanyType": {
+            "type": "string",
+            "enum": [
+                "",
+                "computer_services",
+                "financial_services"
+            ],
+            "x-enum-comments": {
+                "CompanyNil": "Company"
+            },
+            "x-enum-varnames": [
+                "CompanyNil",
+                "CompanyComputerServices",
+                "CompanyFinancialServices"
+            ]
+        },
+        "models.EmailStatusType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2
+            ],
+            "x-enum-varnames": [
+                "EmailStatusSent",
+                "EmailStatusCancelled",
+                "EmailStatusAccepted"
+            ]
+        },
+        "models.FailureCodeType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "x-enum-comments": {
+                "FailureCodeNil": "FailureCode"
+            },
+            "x-enum-varnames": [
+                "FailureCodeNil",
+                "FailureCodeParseRequest",
+                "FailureCodeCreateResponse",
+                "FailureCodeServiceFailed",
+                "FailureCodeCreateUser",
+                "FailureCodePaymentMethodNotFound"
+            ]
+        },
+        "models.JSONB": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "models.KybStatusType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "x-enum-comments": {
+                "KybStatusNil": "KybStatus"
+            },
+            "x-enum-varnames": [
+                "KybStatusNil",
+                "KybStatusApproved",
+                "KybStatusPending",
+                "KybStatusRejected"
+            ]
+        },
+        "models.Organisation": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "company_registered_date": {
+                    "type": "string"
+                },
+                "country_code": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "kyb_status": {
+                    "$ref": "#/definitions/models.KybStatusType"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "object": {
+                    "type": "string"
+                },
+                "parent_organisation_id": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "public_key": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/models.Status"
+                },
+                "type": {
+                    "$ref": "#/definitions/models.CompanyType"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.OrganisationInvitation": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "object": {
+                    "type": "string"
+                },
+                "organisation": {
+                    "$ref": "#/definitions/models.Organisation"
+                },
+                "organisation_id": {
+                    "type": "string"
+                },
+                "sender": {
+                    "$ref": "#/definitions/models.User"
+                },
+                "sender_user_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/models.EmailStatusType"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.OrganisationSecretKey": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "created_by_user_id": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "object": {
+                    "type": "string"
+                },
+                "organisation_id": {
+                    "type": "string"
+                },
+                "permissions": {
+                    "$ref": "#/definitions/models.ApiPermissions"
+                },
+                "secret_key": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Partner": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "config": {
+                    "$ref": "#/definitions/models.JSONB"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "object": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.PaymentMethod": {
+            "type": "object",
+            "properties": {
+                "amount_max": {
+                    "type": "number"
+                },
+                "amount_min": {
+                    "type": "number"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/models.Status"
+                },
+                "type": {
+                    "$ref": "#/definitions/models.PaymentMethodType"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.PaymentMethodType": {
+            "type": "string",
+            "enum": [
+                "",
+                "card",
+                "qrcode",
+                "banktransfer",
+                "ewallet",
+                "hostedcheckout"
+            ],
+            "x-enum-varnames": [
+                "PaymentMethodNil",
+                "PaymentMethodCard",
+                "PaymentMethodQrCode",
+                "PaymentMethodBankTransfer",
+                "PaymentMethodEwallet",
+                "PaymentMethodHostedCheckout"
+            ]
+        },
+        "models.PermissionsAccessType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2
+            ],
+            "x-enum-comments": {
+                "PermissionsAccessNil": "PermissionsAccess"
+            },
+            "x-enum-varnames": [
+                "PermissionsAccessNil",
+                "PermissionsAccessRead",
+                "PermissionsAccessReadWrite"
+            ]
+        },
+        "models.Status": {
+            "type": "string",
+            "enum": [
+                "active",
+                "inactive"
+            ],
+            "x-enum-varnames": [
+                "StatusActive",
+                "StatusInactive"
+            ]
+        },
+        "models.User": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "is_verified": {
+                    "type": "boolean"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "object": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.UserRoleType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "x-enum-comments": {
+                "UserRoleNil": "UserRole"
+            },
+            "x-enum-varnames": [
+                "UserRoleNil",
+                "UserRoleAdmin",
+                "UserRoleUser",
+                "UserRoleApi"
+            ]
+        },
+        "models.Webhook": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "created_by_user_id": {
+                    "description": "ignoring this because swaggo cant understand ksuid.KSUID",
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "object": {
+                    "type": "string"
+                },
+                "organisation_id": {
+                    "description": "ignoring this because swaggo cant understand ksuid.KSUID",
+                    "type": "string"
+                },
+                "subcribed_events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.WebhookSubscribedEvent"
+                    }
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.WebhookEvent": {
+            "type": "string",
+            "enum": [
+                "",
+                "payment.succeeded",
+                "payment.refunded",
+                "payment.sent",
+                "checkout_page.created"
+            ],
+            "x-enum-varnames": [
+                "WebhookEventNil",
+                "WebhookEventPaymentSucceeded",
+                "WebhookEventPaymentRefunded",
+                "WebhookEventPaymentSent",
+                "WebhookEventCheckoutPageCreated"
+            ]
+        },
+        "models.WebhookSubscribedEvent": {
+            "type": "object",
+            "properties": {
+                "event": {
+                    "$ref": "#/definitions/models.WebhookEvent"
+                },
+                "webhook_id": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Authorization": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "externalDocs": {
+        "description": "OpenAPI",
+        "url": "https://swagger.io/resources/open-api/"
+    }
+}

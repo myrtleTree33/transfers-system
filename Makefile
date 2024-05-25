@@ -4,7 +4,7 @@ default:
 
 launch:
 # Install dependencies
-	(cd ./frontend && npm ci)
+	(cd ./backend && go get ./... && go mod tidy)
 # Bring up the docker containers
 	make down
 	make up

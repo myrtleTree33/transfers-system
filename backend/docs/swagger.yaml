@@ -1,0 +1,1836 @@
+definitions:
+  controllers.AcceptOrganisationInvitationByIDReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.AcceptResetPasswordReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.AcceptResetPasswordRequest:
+    properties:
+      new_password:
+        type: string
+      token:
+        type: string
+    required:
+    - new_password
+    - token
+    type: object
+  controllers.AddOrganisationUserReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.AddOrganisationUserRolesReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      roles:
+        items:
+          $ref: '#/definitions/models.UserRoleType'
+        type: array
+    type: object
+  controllers.AddOrganisationUserRolesRequest:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      roles:
+        items:
+          $ref: '#/definitions/models.UserRoleType'
+        type: array
+    type: object
+  controllers.AddSuborganisationByIDReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.AddSuborganisationByIDRequest:
+    type: object
+  controllers.AssignPaymentMethodToOrganisationReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.CreateOrganisationInvitationReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      organisation_invitation:
+        $ref: '#/definitions/models.OrganisationInvitation'
+    type: object
+  controllers.CreateOrganisationInvitationRequest:
+    properties:
+      email:
+        type: string
+    required:
+    - email
+    type: object
+  controllers.CreateOrganisationReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      organisation:
+        $ref: '#/definitions/models.Organisation'
+    type: object
+  controllers.CreateOrganisationRequest:
+    properties:
+      address:
+        type: string
+      company_registered_date:
+        type: string
+      country_code:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+      parent_organisation_id:
+        type: string
+      phone:
+        type: string
+      type:
+        $ref: '#/definitions/models.CompanyType'
+    required:
+    - address
+    - company_registered_date
+    - country_code
+    - email
+    - name
+    - phone
+    - type
+    type: object
+  controllers.CreateOrganisationSecretKeyReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      organisation_secret_key:
+        $ref: '#/definitions/models.OrganisationSecretKey'
+    type: object
+  controllers.CreateOrganisationSecretKeyRequest:
+    properties:
+      name:
+        type: string
+      permissions:
+        $ref: '#/definitions/models.ApiPermissions'
+    required:
+    - name
+    - permissions
+    type: object
+  controllers.CreateUserReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      user:
+        $ref: '#/definitions/models.User'
+    type: object
+  controllers.CreateUserRequest:
+    properties:
+      email:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - first_name
+    - last_name
+    - password
+    type: object
+  controllers.CreateWebhookReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      webhook:
+        $ref: '#/definitions/models.Webhook'
+      webhook_subscribed_events:
+        items:
+          $ref: '#/definitions/models.WebhookEvent'
+        type: array
+    type: object
+  controllers.CreateWebhookRequest:
+    properties:
+      events:
+        items:
+          $ref: '#/definitions/models.WebhookEvent'
+        type: array
+      url:
+        type: string
+    type: object
+  controllers.DeleteOneOrganisationSecretKeyByIDReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.DeleteOrganisationInvitationByIDReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.DeleteOrganisationPaymentMethodReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.DeleteOrganisationUserReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.DeleteOrganisationUserRolesReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.DeleteOrganisationUserRolesRequest:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      roles:
+        items:
+          $ref: '#/definitions/models.UserRoleType'
+        type: array
+    type: object
+  controllers.DeleteWebhookReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.GenerateResetPasswordReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.GenerateResetPasswordRequest:
+    properties:
+      email:
+        type: string
+    required:
+    - email
+    type: object
+  controllers.GetCurrentUserReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      user:
+        $ref: '#/definitions/models.User'
+    type: object
+  controllers.GetOrganisationInvitationsReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.GetOrganisationPaymentMethodsReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      payment_methods:
+        items:
+          $ref: '#/definitions/models.PaymentMethod'
+        type: array
+    type: object
+  controllers.GetOrganisationReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      organisation:
+        $ref: '#/definitions/models.Organisation'
+    type: object
+  controllers.GetOrganisationSecretKeyByIDReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      organisation_secret_key:
+        $ref: '#/definitions/models.OrganisationSecretKey'
+    type: object
+  controllers.GetOrganisationSecretKeysReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      organisation_secret_keys:
+        items:
+          $ref: '#/definitions/models.OrganisationSecretKey'
+        type: array
+    type: object
+  controllers.GetOrganisationUserRolesReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      roles:
+        items:
+          $ref: '#/definitions/models.UserRoleType'
+        type: array
+    type: object
+  controllers.GetOrganisationUsersReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      users:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+    type: object
+  controllers.GetPartnerByCodeResponse:
+    properties:
+      data:
+        $ref: '#/definitions/models.Partner'
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.GetSuborganisationsReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      suborganisations:
+        items:
+          $ref: '#/definitions/models.Organisation'
+        type: array
+    type: object
+  controllers.GetUserReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      user:
+        $ref: '#/definitions/models.User'
+    type: object
+  controllers.GetWebhookReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      webhook:
+        $ref: '#/definitions/models.Webhook'
+    type: object
+  controllers.GetWebhookTokenReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      webhook_token:
+        type: string
+    type: object
+  controllers.GetWebhooksReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      webhooks:
+        items:
+          $ref: '#/definitions/models.Webhook'
+        type: array
+    type: object
+  controllers.LoginUserReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+    type: object
+  controllers.LoginUserRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  controllers.PongResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  controllers.RemoveOrganisationReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.UpdateCurrentUserReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      user:
+        $ref: '#/definitions/models.User'
+    type: object
+  controllers.UpdateWebhookReply:
+    properties:
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    type: object
+  controllers.UpdateWebhookRequest:
+    properties:
+      events:
+        items:
+          $ref: '#/definitions/models.WebhookEvent'
+        type: array
+      url:
+        type: string
+    type: object
+  models.ApiPermissions:
+    properties:
+      payments:
+        $ref: '#/definitions/models.PermissionsAccessType'
+      reports:
+        $ref: '#/definitions/models.PermissionsAccessType'
+      users:
+        $ref: '#/definitions/models.PermissionsAccessType'
+    type: object
+  models.CompanyType:
+    enum:
+    - ""
+    - computer_services
+    - financial_services
+    type: string
+    x-enum-comments:
+      CompanyNil: Company
+    x-enum-varnames:
+    - CompanyNil
+    - CompanyComputerServices
+    - CompanyFinancialServices
+  models.EmailStatusType:
+    enum:
+    - 0
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - EmailStatusSent
+    - EmailStatusCancelled
+    - EmailStatusAccepted
+  models.FailureCodeType:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    type: integer
+    x-enum-comments:
+      FailureCodeNil: FailureCode
+    x-enum-varnames:
+    - FailureCodeNil
+    - FailureCodeParseRequest
+    - FailureCodeCreateResponse
+    - FailureCodeServiceFailed
+    - FailureCodeCreateUser
+    - FailureCodePaymentMethodNotFound
+  models.JSONB:
+    additionalProperties: true
+    type: object
+  models.KybStatusType:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    type: integer
+    x-enum-comments:
+      KybStatusNil: KybStatus
+    x-enum-varnames:
+    - KybStatusNil
+    - KybStatusApproved
+    - KybStatusPending
+    - KybStatusRejected
+  models.Organisation:
+    properties:
+      address:
+        type: string
+      company_registered_date:
+        type: string
+      country_code:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      email:
+        type: string
+      kyb_status:
+        $ref: '#/definitions/models.KybStatusType'
+      name:
+        type: string
+      object:
+        type: string
+      parent_organisation_id:
+        type: string
+      phone:
+        type: string
+      public_key:
+        type: string
+      status:
+        $ref: '#/definitions/models.Status'
+      type:
+        $ref: '#/definitions/models.CompanyType'
+      updated_at:
+        type: string
+    type: object
+  models.OrganisationInvitation:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      email:
+        type: string
+      object:
+        type: string
+      organisation:
+        $ref: '#/definitions/models.Organisation'
+      organisation_id:
+        type: string
+      sender:
+        $ref: '#/definitions/models.User'
+      sender_user_id:
+        type: string
+      status:
+        $ref: '#/definitions/models.EmailStatusType'
+      updated_at:
+        type: string
+    type: object
+  models.OrganisationSecretKey:
+    properties:
+      created_at:
+        type: string
+      created_by_user_id:
+        type: string
+      deleted_at:
+        type: string
+      name:
+        type: string
+      object:
+        type: string
+      organisation_id:
+        type: string
+      permissions:
+        $ref: '#/definitions/models.ApiPermissions'
+      secret_key:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Partner:
+    properties:
+      code:
+        type: string
+      config:
+        $ref: '#/definitions/models.JSONB'
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      name:
+        type: string
+      object:
+        type: string
+      status:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.PaymentMethod:
+    properties:
+      amount_max:
+        type: number
+      amount_min:
+        type: number
+      code:
+        type: string
+      country:
+        type: string
+      created_at:
+        type: string
+      currency:
+        type: string
+      deleted_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      status:
+        $ref: '#/definitions/models.Status'
+      type:
+        $ref: '#/definitions/models.PaymentMethodType'
+      updated_at:
+        type: string
+    type: object
+  models.PaymentMethodType:
+    enum:
+    - ""
+    - card
+    - qrcode
+    - banktransfer
+    - ewallet
+    - hostedcheckout
+    type: string
+    x-enum-varnames:
+    - PaymentMethodNil
+    - PaymentMethodCard
+    - PaymentMethodQrCode
+    - PaymentMethodBankTransfer
+    - PaymentMethodEwallet
+    - PaymentMethodHostedCheckout
+  models.PermissionsAccessType:
+    enum:
+    - 0
+    - 1
+    - 2
+    type: integer
+    x-enum-comments:
+      PermissionsAccessNil: PermissionsAccess
+    x-enum-varnames:
+    - PermissionsAccessNil
+    - PermissionsAccessRead
+    - PermissionsAccessReadWrite
+  models.Status:
+    enum:
+    - active
+    - inactive
+    type: string
+    x-enum-varnames:
+    - StatusActive
+    - StatusInactive
+  models.User:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      is_verified:
+        type: boolean
+      last_name:
+        type: string
+      object:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.UserRoleType:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    type: integer
+    x-enum-comments:
+      UserRoleNil: UserRole
+    x-enum-varnames:
+    - UserRoleNil
+    - UserRoleAdmin
+    - UserRoleUser
+    - UserRoleApi
+  models.Webhook:
+    properties:
+      created_at:
+        type: string
+      created_by_user_id:
+        description: ignoring this because swaggo cant understand ksuid.KSUID
+        type: string
+      deleted_at:
+        type: string
+      object:
+        type: string
+      organisation_id:
+        description: ignoring this because swaggo cant understand ksuid.KSUID
+        type: string
+      subcribed_events:
+        items:
+          $ref: '#/definitions/models.WebhookSubscribedEvent'
+        type: array
+      updated_at:
+        type: string
+      url:
+        type: string
+    type: object
+  models.WebhookEvent:
+    enum:
+    - ""
+    - payment.succeeded
+    - payment.refunded
+    - payment.sent
+    - checkout_page.created
+    type: string
+    x-enum-varnames:
+    - WebhookEventNil
+    - WebhookEventPaymentSucceeded
+    - WebhookEventPaymentRefunded
+    - WebhookEventPaymentSent
+    - WebhookEventCheckoutPageCreated
+  models.WebhookSubscribedEvent:
+    properties:
+      event:
+        $ref: '#/definitions/models.WebhookEvent'
+      webhook_id:
+        type: string
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: localhost:8080
+info:
+  contact: {}
+  description: This is an http-request collection of Tupertino.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Tupertino
+  version: "1.0"
+paths:
+  /v1/organisations:
+    post:
+      description: creates an organisation
+      parameters:
+      - description: payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.CreateOrganisationRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.CreateOrganisationReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.CreateOrganisationReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      - Authorization: []
+      summary: Creates an organisation
+      tags:
+      - Organisations
+  /v1/organisations/{org_id}:
+    delete:
+      description: deletes an organisation
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/controllers.RemoveOrganisationReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.RemoveOrganisationReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Deletes an organisation
+      tags:
+      - Organisations
+    get:
+      description: get an organisation
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Get an organisation
+      tags:
+      - Organisations
+  /v1/organisations/{org_id}/invitations:
+    get:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationInvitationsReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationInvitationsReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Gets organisation's invitations
+      tags:
+      - Organisation invitations
+    post:
+      parameters:
+      - description: payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.CreateOrganisationInvitationRequest'
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.CreateOrganisationInvitationReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.CreateOrganisationInvitationReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Creates and sends an organisation's invitation
+      tags:
+      - Organisation invitations
+  /v1/organisations/{org_id}/invitations/{invitation_id}:
+    delete:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: Organisation's ID
+        in: path
+        name: invitation_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.DeleteOrganisationInvitationByIDReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.DeleteOrganisationInvitationByIDReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Deletes organisation's invitations
+      tags:
+      - Organisation invitations
+    get:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: Invitation's ID
+        in: path
+        name: invitation_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationInvitationsReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationInvitationsReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Gets an organisation's invitation by invitation id
+      tags:
+      - Organisation invitations
+  /v1/organisations/{org_id}/invitations/{invitation_id}/accept:
+    post:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: Organisation's ID
+        in: path
+        name: invitation_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.AcceptOrganisationInvitationByIDReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.AcceptOrganisationInvitationByIDReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Accept organisation's invitations
+      tags:
+      - Organisation invitations
+  /v1/organisations/{org_id}/payment_methods:
+    get:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationPaymentMethodsReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationPaymentMethodsReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Get an organisation's payment-methods
+      tags:
+      - Organisation payment method
+  /v1/organisations/{org_id}/payment_methods/{payment_method_id}:
+    delete:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: Payment-method's Id
+        in: path
+        name: payment_method_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.DeleteOrganisationPaymentMethodReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.DeleteOrganisationPaymentMethodReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Deletes a single payment-method of an organisation
+      tags:
+      - Organisation payment method
+    post:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: Payment-method's Id
+        in: path
+        name: payment_method_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.AssignPaymentMethodToOrganisationReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.AssignPaymentMethodToOrganisationReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Assign payment-method to a single organisation
+      tags:
+      - Organisation payment method
+  /v1/organisations/{org_id}/secret-keys:
+    get:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationSecretKeysReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationSecretKeysReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Gets organisation's secret-keys
+      tags:
+      - Organisation secret keys
+    post:
+      parameters:
+      - description: payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.CreateOrganisationSecretKeyRequest'
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.CreateOrganisationSecretKeyReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.CreateOrganisationSecretKeyReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Creates organisation's secret-key
+      tags:
+      - Organisation secret keys
+  /v1/organisations/{org_id}/secret-keys/{id}:
+    delete:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: Secret-key's ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.DeleteOneOrganisationSecretKeyByIDReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.DeleteOneOrganisationSecretKeyByIDReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Deletes organisation's secret-key by secret-key's id
+      tags:
+      - Organisation secret keys
+    get:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: Secret-key's ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationSecretKeyByIDReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationSecretKeyByIDReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Gets organisation's secret-key by secret-key's id
+      tags:
+      - Organisation secret keys
+  /v1/organisations/{org_id}/suborganisations:
+    get:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetSuborganisationsReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetSuborganisationsReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Gets organisation's sub-organisations by parent-organisation's id
+      tags:
+      - Suborganisations
+    post:
+      parameters:
+      - description: payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.AddSuborganisationByIDRequest'
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.AddSuborganisationByIDReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.AddSuborganisationByIDReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Adds organisation's sub-organisation by organisation's id
+      tags:
+      - Suborganisations
+  /v1/organisations/{org_id}/users:
+    get:
+      description: gets an organisation's users
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationUsersReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationUsersReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Gets an organisation's users
+      tags:
+      - Organisations
+  /v1/organisations/{org_id}/users/{user_id}:
+    delete:
+      description: deletes a user from an organisation
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: User's ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/controllers.DeleteOrganisationUserReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.DeleteOrganisationUserReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Delete a user from an organisation
+      tags:
+      - Organisations
+    post:
+      description: adds a user to an organisation
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: User's ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.AddOrganisationUserReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.AddOrganisationUserReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Adds a user to an organisation
+      tags:
+      - Organisations
+  /v1/organisations/{org_id}/users/{user_id}/roles:
+    delete:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: User's ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      - description: payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.DeleteOrganisationUserRolesRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/controllers.DeleteOrganisationUserRolesReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.DeleteOrganisationUserRolesReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Delete roles of a user of an organisation
+      tags:
+      - Organisation user roles
+    get:
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: User's ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationUserRolesReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetOrganisationUserRolesReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Get roles of a user of an organisation
+      tags:
+      - Organisation user roles
+    post:
+      parameters:
+      - description: payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.AddOrganisationUserRolesRequest'
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: User's ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.AddOrganisationUserRolesReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.AddOrganisationUserRolesReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Add roles to a user of an organisation
+      tags:
+      - Organisation user roles
+  /v1/organisations/{org_id}/webhook-token:
+    get:
+      description: Get organisation's webhook-token
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetWebhookTokenReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetWebhookTokenReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Get organisation's webhook-token
+      tags:
+      - Webhooks
+  /v1/organisations/{org_id}/webhooks:
+    get:
+      description: Get webhook configurations by organisation's id
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetWebhooksReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetWebhooksReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Get webhooks by org's id
+      tags:
+      - Webhooks
+    post:
+      description: Create a webhook configuration
+      parameters:
+      - description: Organisation's ID
+        in: path
+        name: org_id
+        required: true
+        type: string
+      - description: payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.CreateWebhookRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.CreateWebhookReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.CreateWebhookReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Create webhook
+      tags:
+      - Webhooks
+  /v1/partners/{code}:
+    post:
+      description: get partner data by code
+      parameters:
+      - description: API key
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: partner code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetPartnerByCodeResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetPartnerByCodeResponse'
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
+      summary: Get partner data
+      tags:
+      - Partners
+  /v1/password-resets/accept:
+    post:
+      description: proceeds reset password attempts
+      parameters:
+      - description: reset password details
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.AcceptResetPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.AcceptResetPasswordReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.AcceptResetPasswordReply'
+      summary: Confirm reset password request
+      tags:
+      - Password resets
+  /v1/password-resets/generate:
+    post:
+      description: triggers reset password generator
+      parameters:
+      - description: reset password details
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.GenerateResetPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GenerateResetPasswordReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GenerateResetPasswordReply'
+      summary: Generate reset password request
+      tags:
+      - Password resets
+  /v1/ping:
+    get:
+      description: Ping handler
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.PongResponse'
+      summary: Ping handler
+  /v1/users:
+    post:
+      description: Creates a user
+      parameters:
+      - description: new user details
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.CreateUserReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.CreateUserReply'
+      summary: Create user
+      tags:
+      - Users
+  /v1/users/{id}:
+    get:
+      description: get a single user by user's id
+      parameters:
+      - description: User's ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetUserReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetUserReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Get user by id
+      tags:
+      - Users
+  /v1/users/current:
+    get:
+      description: get current user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetCurrentUserReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetCurrentUserReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Get current user
+      tags:
+      - Users
+    put:
+      description: update current user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.UpdateCurrentUserReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.UpdateCurrentUserReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Update current user
+      tags:
+      - Users
+  /v1/users/login:
+    post:
+      description: Do login
+      parameters:
+      - description: login details
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.LoginUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.LoginUserReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.LoginUserReply'
+      summary: Login user
+      tags:
+      - Users
+  /v1/webhooks/{webhook_id}:
+    delete:
+      description: Delete a webhook configuration by webhook's id
+      parameters:
+      - description: Webhook's ID
+        in: path
+        name: webhook_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.DeleteWebhookReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.DeleteWebhookReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Delete a webhook
+      tags:
+      - Webhooks
+    get:
+      description: Get a webhook configuration by webhook id
+      parameters:
+      - description: Webhook's ID
+        in: path
+        name: webhook_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.GetWebhookReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.GetWebhookReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Get webhook by webhook id
+      tags:
+      - Webhooks
+    put:
+      description: Update a webhook configuration by webhook's id
+      parameters:
+      - description: payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.UpdateWebhookRequest'
+      - description: Webhook's ID
+        in: path
+        name: webhook_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.UpdateWebhookReply'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.UpdateWebhookReply'
+        "401":
+          description: Unauthorized
+      security:
+      - Authorization: []
+      summary: Update webhook
+      tags:
+      - Webhooks
+securityDefinitions:
+  Authorization:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
