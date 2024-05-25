@@ -1,0 +1,27 @@
+{
+  "packages": [
+    "nodejs@latest",
+    "pre-commit@latest"
+  ],
+  "env": {
+    "DEVBOX_COREPACK_ENABLED": "true"
+  },
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null",
+      "echo 'installing dependencies...'",
+      "(cd backend && pre-commit autoupdate && pre-commit install)",
+      "clear",
+      "alias nest='npx @nestjs/cli'",
+      "alias prisma=\"npx dotenv -e .env.development -- npx prisma\"",
+      "echo '-----------------------------------------'",
+      "echo 'Welcome to Daytwo local development environment (DEV)!'",
+      "echo '-----------------------------------------'"
+    ],
+    "scripts": {
+      "test": [
+        "echo \"Error: no test specified\" && exit 1"
+      ]
+    }
+  }
+}

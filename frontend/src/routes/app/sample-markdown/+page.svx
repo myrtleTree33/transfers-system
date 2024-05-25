@@ -1,0 +1,17 @@
+<script lang="ts">
+	import D2Code from "$lib/components/D2Code.svelte";
+</script>
+
+# Hello world
+
+This is an example of a page, that has Markdown bindings.  You can use this page to write documentation in Markdown.
+
+## Code snippet
+
+<D2Code>
+./daytwo
+</D2Code>
+
+## More information
+
+Please visit <a class="hyperlink" href="https://daytwo.io">https://daytwo.io</a>

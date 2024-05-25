@@ -1,0 +1,38 @@
+version: '3.8'
+
+# default settings for service
+x-default:
+  &default
+  deploy:
+    resources:
+      limits:
+        memory: 16m # defaulted memory limit to 16mb
+  restart: unless-stopped
+
+# default settings for deps
+x-deps:
+  &deps
+  deploy:
+    resources:
+      limits:
+        memory: 256m # defaulted memory limit to 256mb
+  restart: unless-stopped
+
+services:
+  postgres:
+    <<: *deps
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: local
+      POSTGRES_PASSWORD: local
+    volumes:
+      - ./.docker/postgres:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d postgres -U local"]
+      interval: 1s
+      timeout: 5s
+      retries: 5
