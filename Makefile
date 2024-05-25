@@ -26,3 +26,8 @@ down:
 
 run-dev:
 	(cd backend && air)
+
+generate-docs:
+	(cd backend && swag init)
+	cp -r ./backend/docs ./api_docs/docs
+	(cd api_docs && npm ci && npm run dev)

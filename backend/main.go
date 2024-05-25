@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "backend/docs"
 	"backend/internal/app"
 	"backend/internal/controllers"
 	"backend/internal/controllers/accounts_routes"
@@ -11,8 +12,6 @@ import (
 	"backend/internal/utilities"
 	"context"
 	"embed"
-
-	_ "backend/docs"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -105,6 +104,7 @@ func initHandler(server *sdkhttp.IServer) *gin.Engine {
 
 	// setup gin handler
 	r := gin.Default()
+	// docs.SwaggerInfo.BasePath = "/v1"
 
 	v1 := r.Group("/v1")
 	v1.Use(middleware.WithTraceId())
