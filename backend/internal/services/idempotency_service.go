@@ -4,40 +4,57 @@ import (
 	"backend/internal/models"
 	"bytes"
 	"crypto/sha256"
+	"errors"
 	"fmt"
 	"io"
 
 	"github.com/gin-gonic/gin"
-	"github.com/segmentio/ksuid"
+	"gorm.io/gorm"
 )
 
 type IIdempotencyService interface {
-	GenKeyHash(c *gin.Context) (string, error)
-	FindOneByKeyHashAndOrganisationID(keyHash string, organisationID ksuid.KSUID) (*models.Idempotency, error)
 	CreateOne(idempotency *models.Idempotency) error
+	GetByKeyHash(keyHash string) (*models.Idempotency, error)
 	UpdateOneByID(idempotecy *models.Idempotency) (*models.Idempotency, error)
+	GenKeyHash(c *gin.Context) (string, error)
 }
 
 type IdempotencyService struct {
+	db *gorm.DB
 }
 
-func NewIdempotencyService() IIdempotencyService {
-	return &IdempotencyService{}
+func NewIdempotencyService(db *gorm.DB) IIdempotencyService {
+	return &IdempotencyService{
+		db: db,
+	}
 }
 
 func (s *IdempotencyService) CreateOne(idempotency *models.Idempotency) error {
-	// TODO fill in
+	err := s.db.Create(idempotency).Error
+	if err != nil {
+		return fmt.Errorf("unable to create idempotency err=%w", err)
+	}
 	return nil
 }
 
-func (s *IdempotencyService) FindOneByKeyHashAndOrganisationID(keyHash string, organisationID ksuid.KSUID) (*models.Idempotency, error) {
-	// TODO fill in
-	return nil, nil
+func (s *IdempotencyService) GetByKeyHash(keyHash string) (*models.Idempotency, error) {
+	found := &models.Idempotency{}
+	err := s.db.Model(models.Idempotency{}).Where("key_hash = ?", keyHash).First(found).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("unable to find idempotency by key hash err=%w", err)
+	}
+	return found, nil
 }
 
-func (s *IdempotencyService) UpdateOneByID(idempotecy *models.Idempotency) (*models.Idempotency, error) {
-	// TODO fill in
-	return nil, nil
+func (s *IdempotencyService) UpdateOneByID(updated *models.Idempotency) (*models.Idempotency, error) {
+	err := s.db.Model(models.Idempotency{}).Where("id = ?", updated.ID).Updates(&updated).Error
+	if err != nil {
+		return updated, fmt.Errorf("unable to update idempotency record err=%w", err)
+	}
+	return updated, nil
 }
 
 func (s *IdempotencyService) GenKeyHash(c *gin.Context) (string, error) {

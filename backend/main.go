@@ -53,7 +53,7 @@ func main() {
 	db := app.NewDB(app.Config, app.Logger)
 
 	// Initialise services
-	idempotencyService := services.NewIdempotencyService()
+	idempotencyService := services.NewIdempotencyService(db)
 	accountsService := services.NewAccountsService(db)
 	transactionsService := services.NewTransactionsService(db, accountsService)
 
@@ -101,7 +101,7 @@ func main() {
 // initHandler is to setup app's handler
 func initHandler(server *sdkhttp.IServer) *gin.Engine {
 	// prep middlewares
-	// withIdempotency := middleware.WithIdempotency(server.IdempotencyService)
+	withIdempotency := middleware.WithIdempotency(server.IdempotencyService)
 
 	// setup gin handler
 	r := gin.Default()
@@ -117,6 +117,7 @@ func initHandler(server *sdkhttp.IServer) *gin.Engine {
 		{
 
 			accounts.POST("/",
+				withIdempotency,
 				accounts_routes.CreateAccountByID,
 			)
 			accounts.GET("/:account_id",
@@ -127,6 +128,7 @@ func initHandler(server *sdkhttp.IServer) *gin.Engine {
 		transactions := v1.Group("/transactions")
 		{
 			transactions.POST("/",
+				withIdempotency,
 				transactions_routes.CreateTransaction,
 			)
 		}

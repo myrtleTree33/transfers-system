@@ -1,6 +1,7 @@
 package transactions_routes
 
 import (
+	"backend/internal/controllers"
 	"backend/internal/controllers/controller_models"
 	"backend/internal/models"
 	"backend/internal/models/dto"
@@ -15,7 +16,7 @@ func CreateTransaction(c *gin.Context) {
 	// Parse request
 	var req = dto.CreateTransactionReqDto{}
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, dto.CreateTransactionResDto{
+		controllers.ReplyJSONWithIdempotency(c, http.StatusBadRequest, dto.CreateTransactionResDto{
 			BaseReply: controller_models.BaseReply{
 				FailureCode: models.FailureCodeParseRequest,
 				Error:       err.Error(),
@@ -36,7 +37,7 @@ func CreateTransaction(c *gin.Context) {
 	// Save transaction
 	createdTransaction, err := sdkhttp.Server.TransactionsService.Create(c, transaction)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, dto.CreateTransactionResDto{
+		controllers.ReplyJSONWithIdempotency(c, http.StatusInternalServerError, dto.CreateTransactionResDto{
 			BaseReply: controller_models.BaseReply{
 				FailureCode: models.FailureCodeServiceFailed,
 				Error:       err.Error(),
@@ -49,5 +50,5 @@ func CreateTransaction(c *gin.Context) {
 		Transaction: *createdTransaction,
 	}
 
-	c.JSON(http.StatusOK, res)
+	controllers.ReplyJSONWithIdempotency(c, http.StatusOK, res)
 }

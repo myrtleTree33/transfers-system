@@ -1,6 +1,7 @@
 package accounts_routes
 
 import (
+	"backend/internal/controllers"
 	"backend/internal/controllers/controller_models"
 	"backend/internal/models"
 	"backend/internal/models/dto"
@@ -32,7 +33,7 @@ func CreateAccountByID(c *gin.Context) {
 	// Save account
 	createdAccount, err := sdkhttp.Server.AccountsService.Create(c, account)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, dto.CreateAccountResDto{
+		controllers.ReplyJSONWithIdempotency(c, http.StatusInternalServerError, dto.CreateAccountResDto{
 			BaseReply: controller_models.BaseReply{
 				FailureCode: models.FailureCodeServiceFailed,
 				Error:       err.Error(),
@@ -46,7 +47,7 @@ func CreateAccountByID(c *gin.Context) {
 		Balance:   createdAccount.Balance,
 	}
 
-	c.JSON(http.StatusOK, res)
+	controllers.ReplyJSONWithIdempotency(c, http.StatusOK, res)
 }
 
 func GetAccountByID(c *gin.Context) {

@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"backend/internal/app"
-	"backend/internal/models"
 	"backend/internal/sdkhttp"
 	"encoding/json"
 	"fmt"
@@ -12,7 +11,7 @@ import (
 
 // ReplyJSONWithIdempotency is a middleware that replies with JSON and updates an idempotency record
 func ReplyJSONWithIdempotency(c *gin.Context, httpStatusCode int, httpBody interface{}) {
-	err := UpdateIdempotency(c, httpStatusCode, httpBody)
+	err := updateIdempotency(c, httpStatusCode, httpBody)
 	if err != nil {
 		app.Logger.ErrorfContext(c, "unable to update idempotency record err=%w", err)
 	}
@@ -20,8 +19,8 @@ func ReplyJSONWithIdempotency(c *gin.Context, httpStatusCode int, httpBody inter
 	c.JSON(httpStatusCode, httpBody)
 }
 
-// UpdateIdempotency is a middleware that updates an idempotency record
-func UpdateIdempotency(c *gin.Context, httpResponseCode int, httpResponseBody interface{}) error {
+// updateIdempotency is a middleware that updates an idempotency record
+func updateIdempotency(c *gin.Context, httpResponseCode int, httpResponseBody interface{}) error {
 	// Retrieve idempotency key from header
 	key := c.GetString("idempotency_keyhash")
 	if key == "" {
@@ -29,17 +28,14 @@ func UpdateIdempotency(c *gin.Context, httpResponseCode int, httpResponseBody in
 	}
 
 	// // Retrieve idempotency from database
-	// idempotency, err := sdkhttp.Server.IdempotencyService.FindOneByKeyHashAndOrganisationID(key, org.ID)
-	// if err != nil {
-	// 	return fmt.Errorf("unable to get idempotency record err=%w", err)
-	// }
+	idempotency, err := sdkhttp.Server.IdempotencyService.GetByKeyHash(key)
+	if err != nil {
+		return fmt.Errorf("unable to get idempotency record err=%w", err)
+	}
 
-	// if idempotency == nil {
-	// 	return fmt.Errorf("idempotency record not found")
-	// }
-
-	// TODO fill this in
-	idempotency := &models.Idempotency{}
+	if idempotency == nil {
+		return fmt.Errorf("idempotency record not found")
+	}
 
 	// Convert HTTP response body to JSON string
 	if httpResponseBody != nil {
@@ -54,7 +50,7 @@ func UpdateIdempotency(c *gin.Context, httpResponseCode int, httpResponseBody in
 	idempotency.HttpResponseCode = httpResponseCode
 	// idempotency.HttpResponseHeaders = httpResponseHeaders
 
-	_, err := sdkhttp.Server.IdempotencyService.UpdateOneByID(idempotency)
+	_, err = sdkhttp.Server.IdempotencyService.UpdateOneByID(idempotency)
 	if err != nil {
 		return fmt.Errorf("unable to update idempotency record err=%w", err)
 	}
