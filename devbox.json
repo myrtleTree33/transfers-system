@@ -11,12 +11,13 @@
   },
   "shell": {
     "init_hook": [
-      "echo 'Welcome to devbox!' > /dev/null",
       "echo 'installing dependencies...'",
       "export GOMODCACHE=$(go env GOMODCACHE)",
       "export GOCACHE=$(go env GOCACHE)",
       "export PATH=$(go env GOPATH)/bin:$PATH",
-      "(cd backend && pre-commit autoupdate && pre-commit install)",
+      "pre-commit autoupdate && pre-commit install",
+      "go install github.com/shipengqi/commitizen@latest",
+      "commitizen init",
       "go install github.com/pressly/goose/v3/cmd/goose@latest",
       "go install github.com/cosmtrek/air@latest",
       "clear",

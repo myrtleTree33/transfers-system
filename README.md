@@ -1,6 +1,5 @@
 # Daytwo Template Starter
 
-This project is a starter template for Daytwo applications.
 
 ## Documentation
 
