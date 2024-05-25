@@ -2,6 +2,21 @@
 
 Transfers System is a template for a web application that allows users to transfer money between accounts. This template is built using the TransfersSystem API and is designed to be a starting point for developers to build their own applications.
 
+## Features
+
+The TransfersSystem Template Starter includes the following features:
+
+- Nix for virtualised local development
+- Docker for containerisation
+- Gorm for database management
+- Mockery for mocking
+- GORM for database ORM
+- Goose for database migrations
+- Air for live reloading
+- Postman for API testing
+- Swagger for API documentation
+- CORS for cross-origin resource sharing
+
 ## Installation
 
 To install the TransfersSystem Template Starter, you will need to have a working installation of Docker, Git and Devbox (Virtual environment based off Nix-Shell).  
@@ -39,6 +54,24 @@ To run the application, run the following command in the root directory of the p
 cd ./backend
 air
 ```
+
+## Database migrations
+
+To create a new migration, run the following command in the root directory of the project:
+
+```bash
+cd backend/
+go run ./cmd/goosecli create migrations/add_idempotencies_table sql
+```
+
+To run the migrations, run the following command in the root directory of the project:
+
+```bash
+cd backend/
+go run ./cmd/goosecli up
+```
+
+
 
 ## Postman collection
 

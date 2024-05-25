@@ -9,6 +9,7 @@ launch:
 	make down
 	make up
 # Migrate and seed database
+	(cd ./backend && go run ./cmd/goosecli up)
 	@echo "---------------------------------------------------"
 	@echo "Welcome to the Transfers System Dev Environment."
 	@echo "What will you build today?"
