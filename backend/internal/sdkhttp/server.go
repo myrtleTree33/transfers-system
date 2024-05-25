@@ -3,8 +3,9 @@ package sdkhttp
 import "backend/internal/services"
 
 type IServer struct {
-	IdempotencyService services.IIdempotencyService
-	AccountsService    services.IAccountsService
+	IdempotencyService  services.IIdempotencyService
+	AccountsService     services.IAccountsService
+	TransactionsService services.ITransactionsService
 	// Add service interfaces here
 	// ...
 }
@@ -12,11 +13,13 @@ type IServer struct {
 func NewServer(
 	idempotencyService services.IIdempotencyService,
 	accountsService services.IAccountsService,
+	transactionsService services.ITransactionsService,
 ) *IServer {
 
 	return &IServer{
-		IdempotencyService: idempotencyService,
-		AccountsService:    accountsService,
+		IdempotencyService:  idempotencyService,
+		AccountsService:     accountsService,
+		TransactionsService: transactionsService,
 	}
 }
 

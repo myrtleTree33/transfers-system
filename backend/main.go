@@ -4,6 +4,7 @@ import (
 	"backend/internal/app"
 	"backend/internal/controllers"
 	"backend/internal/controllers/accounts_routes"
+	transactions_routes "backend/internal/controllers/transaction_routes"
 	"backend/internal/middleware"
 	"backend/internal/sdkhttp"
 	"backend/internal/services"
@@ -54,10 +55,12 @@ func main() {
 	// Initialise services
 	idempotencyService := services.NewIdempotencyService()
 	accountsService := services.NewAccountsService(db)
+	transactionsService := services.NewTransactionsService(db, accountsService)
 
 	sdkhttp.Server = sdkhttp.NewServer(
 		idempotencyService,
 		accountsService,
+		transactionsService,
 	)
 
 	// setup individual workers
@@ -118,6 +121,13 @@ func initHandler(server *sdkhttp.IServer) *gin.Engine {
 			)
 			accounts.GET("/:account_id",
 				accounts_routes.GetAccountByID,
+			)
+		}
+
+		transactions := v1.Group("/transactions")
+		{
+			transactions.POST("/",
+				transactions_routes.CreateTransaction,
 			)
 		}
 	}

@@ -11,8 +11,8 @@ import (
 type IAccountsService interface {
 	Create(c context.Context, account models.Account) (*models.Account, error)
 	GetByID(c context.Context, accountID string) (*models.Account, error)
-	UpdateBalance(c context.Context, accountID string, balance float64) (*models.Account, error)
 	SubtractBalance(c context.Context, accountID string, amount float64) (*models.Account, error)
+	AddBalance(c context.Context, accountID string, amount float64) (*models.Account, error)
 }
 
 type AccountsService struct {
@@ -48,15 +48,6 @@ func (s *AccountsService) GetByID(c context.Context, accountID string) (*models.
 	return account, nil
 }
 
-func (s *AccountsService) UpdateBalance(c context.Context, accountID string, balance float64) (*models.Account, error) {
-	account := &models.Account{}
-	if err := s.db.Model(&account).Where("account_id = ?", accountID).Update("balance", balance).Error; err != nil {
-		return nil, err
-	}
-
-	return account, nil
-}
-
 func (s *AccountsService) SubtractBalance(c context.Context, accountID string, amount float64) (*models.Account, error) {
 	account, err := s.GetByID(c, accountID)
 	if err != nil {
@@ -68,7 +59,7 @@ func (s *AccountsService) SubtractBalance(c context.Context, accountID string, a
 		return nil, errors.New("insufficient balance")
 	}
 
-	updatedAccount, err := s.UpdateBalance(c, accountID, newBalance)
+	updatedAccount, err := s.updateBalance(c, accountID, newBalance)
 	if err != nil {
 		return nil, err
 	}
@@ -87,10 +78,21 @@ func (s *AccountsService) AddBalance(c context.Context, accountID string, amount
 		return nil, errors.New("insufficient balance")
 	}
 
-	updatedAccount, err := s.UpdateBalance(c, accountID, newBalance)
+	updatedAccount, err := s.updateBalance(c, accountID, newBalance)
 	if err != nil {
 		return nil, err
 	}
 
+	return updatedAccount, nil
+}
+
+func (s *AccountsService) updateBalance(c context.Context, accountID string, balance float64) (*models.Account, error) {
+	if err := s.db.Model(&models.Account{}).Where("account_id = ?", accountID).Update("balance", balance).Error; err != nil {
+		return nil, err
+	}
+	updatedAccount, err := s.GetByID(c, accountID)
+	if err != nil {
+		return nil, err
+	}
 	return updatedAccount, nil
 }
