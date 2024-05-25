@@ -31,6 +31,10 @@ func NewTransactionsService(db *gorm.DB, accountsService IAccountsService) ITran
 
 // Create creates a new transaction
 func (s *TransactionsService) Create(c context.Context, transaction models.Transaction) (*models.Transaction, error) {
+	if transaction.Amount < 0 {
+		return nil, errors.New("amount cannot be negative")
+	}
+
 	// Subtract balance from source account first
 	// If the source account does not have enough balance, return an error
 	_, err := s.accountsService.SubtractBalance(c, transaction.SourceAccountID, transaction.Amount)
