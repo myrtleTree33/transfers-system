@@ -36,3 +36,22 @@ services:
       interval: 1s
       timeout: 5s
       retries: 5
+
+  redis:
+    <<: *deps
+    image: redis:6.2-alpine
+    container_name: redis
+    command: redis-server --requirepass local
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD-SHELL", "redis-cli ping" ]
+  
+  asynq-monitoring:
+    <<: *default
+    platform: linux/amd64
+    image: hibiken/asynqmon
+    ports:
+      - 7001:8080
+    environment:
+      - REDIS_URL=redis://:local@redis:6379/0

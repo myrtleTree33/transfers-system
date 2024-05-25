@@ -4,17 +4,15 @@ default:
 
 launch:
 # Install dependencies
-	(cd ./backend && npm ci)
 	(cd ./frontend && npm ci)
 # Bring up the docker containers
 	make down
 	make up
 # Migrate and seed database
-	make seed-db
-	@echo "----------------------------------------"
-	@echo "Welcome to the Daytwo Dev Environment."
+	@echo "---------------------------------------------------"
+	@echo "Welcome to the Transfers System Dev Environment."
 	@echo "What will you build today?"
-	@echo "----------------------------------------"
+	@echo "---------------------------------------------------"
 
 # Setup docker containers
 up:
@@ -26,6 +24,6 @@ down:
 	(echo "y" | docker volume prune)
 	clear
 
-# Migrate and seed database
-seed-db:
-	(cd ./backend && npm run db:migrate-dev)
+run-dev:
+	(cd backend && air)
+

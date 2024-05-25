@@ -1,7 +1,10 @@
 {
   "packages": [
+    "go@1.22.3",
     "nodejs@latest",
-    "pre-commit@latest"
+    "pre-commit@latest",
+    "golangci-lint@latest",
+    "goimports@latest"
   ],
   "env": {
     "DEVBOX_COREPACK_ENABLED": "true"
@@ -10,10 +13,13 @@
     "init_hook": [
       "echo 'Welcome to devbox!' > /dev/null",
       "echo 'installing dependencies...'",
+      "export GOMODCACHE=$(go env GOMODCACHE)",
+      "export GOCACHE=$(go env GOCACHE)",
+      "export PATH=$(go env GOPATH)/bin:$PATH",
       "(cd backend && pre-commit autoupdate && pre-commit install)",
+      "go install github.com/pressly/goose/v3/cmd/goose@latest",
+      "go install github.com/cosmtrek/air@latest",
       "clear",
-      "alias nest='npx @nestjs/cli'",
-      "alias prisma=\"npx dotenv -e .env.development -- npx prisma\"",
       "echo '-----------------------------------------'",
       "echo 'Welcome to Daytwo local development environment (DEV)!'",
       "echo '-----------------------------------------'"
