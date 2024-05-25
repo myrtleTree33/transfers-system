@@ -4,6 +4,77 @@ definitions:
       message:
         type: string
     type: object
+  dto.CreateAccountResDto:
+    properties:
+      account_id:
+        type: string
+      balance:
+        type: number
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    required:
+    - account_id
+    - balance
+    type: object
+  dto.CreateTransactionResDto:
+    properties:
+      amount:
+        type: number
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      destination_account_id:
+        type: string
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+      object:
+        type: string
+      source_account_id:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.GetAccountResDto:
+    properties:
+      account_id:
+        type: string
+      balance:
+        type: number
+      error:
+        type: string
+      failure_code:
+        $ref: '#/definitions/models.FailureCodeType'
+    required:
+    - account_id
+    - balance
+    type: object
+  models.FailureCodeType:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    type: integer
+    x-enum-comments:
+      FailureCodeNil: FailureCode
+    x-enum-varnames:
+    - FailureCodeNil
+    - FailureCodeParseRequest
+    - FailureCodeNotFound
+    - FailureCodeCreateResponse
+    - FailureCodeServiceFailed
+    - FailureCodeCreateUser
+    - FailureCodePaymentMethodNotFound
+    - FailureCodeInvalidPartnerConfig
 host: localhost:8080
 info:
   contact: {}
@@ -14,6 +85,27 @@ info:
   title: Transfers System
   version: "1.0"
 paths:
+  /v1/accounts:
+    get:
+      description: Get account by ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.GetAccountResDto'
+      summary: Get account by ID
+    post:
+      description: Create account
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CreateAccountResDto'
+      summary: Create account
   /v1/ping:
     get:
       description: Ping handler
@@ -25,6 +117,17 @@ paths:
           schema:
             $ref: '#/definitions/controllers.PongResponse'
       summary: Ping handler
+  /v1/transactions:
+    post:
+      description: Create transaction
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CreateTransactionResDto'
+      summary: Create transaction
 securityDefinitions:
   Authorization:
     in: header

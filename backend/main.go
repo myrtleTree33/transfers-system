@@ -1,20 +1,14 @@
 package main
 
 import (
-	_ "backend/docs"
 	"backend/internal/app"
 	"backend/internal/controllers"
-	"backend/internal/controllers/accounts_routes"
-	transactions_routes "backend/internal/controllers/transaction_routes"
 	"backend/internal/middleware"
 	"backend/internal/sdkhttp"
 	"backend/internal/services"
 	"backend/internal/utilities"
 	"context"
 	"embed"
-
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
@@ -104,7 +98,6 @@ func initHandler(server *sdkhttp.IServer) *gin.Engine {
 
 	// setup gin handler
 	r := gin.Default()
-	// docs.SwaggerInfo.BasePath = "/v1"
 
 	v1 := r.Group("/v1")
 	v1.Use(middleware.WithTraceId())
@@ -118,10 +111,10 @@ func initHandler(server *sdkhttp.IServer) *gin.Engine {
 
 			accounts.POST("/",
 				withIdempotency,
-				accounts_routes.CreateAccountByID,
+				controllers.CreateAccountByID,
 			)
 			accounts.GET("/:account_id",
-				accounts_routes.GetAccountByID,
+				controllers.GetAccountByID,
 			)
 		}
 
@@ -129,13 +122,13 @@ func initHandler(server *sdkhttp.IServer) *gin.Engine {
 		{
 			transactions.POST("/",
 				withIdempotency,
-				transactions_routes.CreateTransaction,
+				controllers.CreateTransaction,
 			)
 		}
 	}
 
-	// spawn swagger ui
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	// // spawn swagger ui
+	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	return r
 }

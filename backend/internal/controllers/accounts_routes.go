@@ -1,7 +1,6 @@
-package accounts_routes
+package controllers
 
 import (
-	"backend/internal/controllers"
 	"backend/internal/controllers/controller_models"
 	"backend/internal/models"
 	"backend/internal/models/dto"
@@ -11,6 +10,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary      Create account
+// @Description  Create account
+// @Produce      json
+// @Success      200  {object}  dto.CreateAccountResDto
+// @Router       /v1/accounts [post]
 func CreateAccountByID(c *gin.Context) {
 	// Parse request
 	var req = dto.CreateAccountReqDto{}
@@ -33,7 +37,7 @@ func CreateAccountByID(c *gin.Context) {
 	// Save account
 	createdAccount, err := sdkhttp.Server.AccountsService.Create(c, account)
 	if err != nil {
-		controllers.ReplyJSONWithIdempotency(c, http.StatusInternalServerError, dto.CreateAccountResDto{
+		ReplyJSONWithIdempotency(c, http.StatusInternalServerError, dto.CreateAccountResDto{
 			BaseReply: controller_models.BaseReply{
 				FailureCode: models.FailureCodeServiceFailed,
 				Error:       err.Error(),
@@ -47,9 +51,14 @@ func CreateAccountByID(c *gin.Context) {
 		Balance:   createdAccount.Balance,
 	}
 
-	controllers.ReplyJSONWithIdempotency(c, http.StatusOK, res)
+	ReplyJSONWithIdempotency(c, http.StatusOK, res)
 }
 
+// @Summary     Get account by ID
+// @Description  Get account by ID
+// @Produce      json
+// @Success      200  {object}  dto.GetAccountResDto
+// @Router       /v1/accounts [get]
 func GetAccountByID(c *gin.Context) {
 	accountId := c.Param("account_id")
 

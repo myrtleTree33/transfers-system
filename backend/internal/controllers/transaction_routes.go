@@ -1,7 +1,6 @@
-package transactions_routes
+package controllers
 
 import (
-	"backend/internal/controllers"
 	"backend/internal/controllers/controller_models"
 	"backend/internal/models"
 	"backend/internal/models/dto"
@@ -12,11 +11,16 @@ import (
 	"github.com/segmentio/ksuid"
 )
 
+// @Summary     Create transaction
+// @Description  Create transaction
+// @Produce      json
+// @Success      200  {object}  dto.CreateTransactionResDto
+// @Router       /v1/transactions [post]
 func CreateTransaction(c *gin.Context) {
 	// Parse request
 	var req = dto.CreateTransactionReqDto{}
 	if err := c.ShouldBindJSON(&req); err != nil {
-		controllers.ReplyJSONWithIdempotency(c, http.StatusBadRequest, dto.CreateTransactionResDto{
+		ReplyJSONWithIdempotency(c, http.StatusBadRequest, dto.CreateTransactionResDto{
 			BaseReply: controller_models.BaseReply{
 				FailureCode: models.FailureCodeParseRequest,
 				Error:       err.Error(),
@@ -37,7 +41,7 @@ func CreateTransaction(c *gin.Context) {
 	// Save transaction
 	createdTransaction, err := sdkhttp.Server.TransactionsService.Create(c, transaction)
 	if err != nil {
-		controllers.ReplyJSONWithIdempotency(c, http.StatusInternalServerError, dto.CreateTransactionResDto{
+		ReplyJSONWithIdempotency(c, http.StatusInternalServerError, dto.CreateTransactionResDto{
 			BaseReply: controller_models.BaseReply{
 				FailureCode: models.FailureCodeServiceFailed,
 				Error:       err.Error(),
@@ -50,5 +54,5 @@ func CreateTransaction(c *gin.Context) {
 		Transaction: *createdTransaction,
 	}
 
-	controllers.ReplyJSONWithIdempotency(c, http.StatusOK, res)
+	ReplyJSONWithIdempotency(c, http.StatusOK, res)
 }

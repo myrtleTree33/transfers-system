@@ -19,6 +19,38 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/v1/accounts": {
+            "get": {
+                "description": "Get account by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get account by ID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.GetAccountResDto"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create account",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Create account",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateAccountResDto"
+                        }
+                    }
+                }
+            }
+        },
         "/v1/ping": {
             "get": {
                 "description": "Ping handler",
@@ -35,6 +67,23 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/v1/transactions": {
+            "post": {
+                "description": "Create transaction",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Create transaction",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.CreateTransactionResDto"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -45,6 +94,106 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        },
+        "dto.CreateAccountResDto": {
+            "type": "object",
+            "required": [
+                "account_id",
+                "balance"
+            ],
+            "properties": {
+                "account_id": {
+                    "type": "string"
+                },
+                "balance": {
+                    "type": "number"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "dto.CreateTransactionResDto": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "destination_account_id": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                },
+                "object": {
+                    "type": "string"
+                },
+                "source_account_id": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.GetAccountResDto": {
+            "type": "object",
+            "required": [
+                "account_id",
+                "balance"
+            ],
+            "properties": {
+                "account_id": {
+                    "type": "string"
+                },
+                "balance": {
+                    "type": "number"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "failure_code": {
+                    "$ref": "#/definitions/models.FailureCodeType"
+                }
+            }
+        },
+        "models.FailureCodeType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+            ],
+            "x-enum-comments": {
+                "FailureCodeNil": "FailureCode"
+            },
+            "x-enum-varnames": [
+                "FailureCodeNil",
+                "FailureCodeParseRequest",
+                "FailureCodeNotFound",
+                "FailureCodeCreateResponse",
+                "FailureCodeServiceFailed",
+                "FailureCodeCreateUser",
+                "FailureCodePaymentMethodNotFound",
+                "FailureCodeInvalidPartnerConfig"
+            ]
         }
     },
     "securityDefinitions": {
