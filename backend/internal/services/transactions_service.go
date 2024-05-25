@@ -31,7 +31,7 @@ func NewTransactionsService(db *gorm.DB, accountsService IAccountsService) ITran
 
 // Create creates a new transaction
 func (s *TransactionsService) Create(c context.Context, transaction models.Transaction) (*models.Transaction, error) {
-	if transaction.Amount < 0 {
+	if transaction.Amount <= 0 {
 		return nil, errors.New("amount cannot be negative")
 	}
 
