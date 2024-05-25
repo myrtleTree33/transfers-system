@@ -49,17 +49,15 @@ func main() {
 	app.Worker = app.NewWorker(app.Logger, app.Config)
 
 	// Initialise DB
-	// db := app.NewDB(app.Config, app.Logger)
-
-	// Initialise repositories
-	// ...
+	db := app.NewDB(app.Config, app.Logger)
 
 	// Initialise services
-	// ...
 	idempotencyService := services.NewIdempotencyService()
+	accountsService := services.NewAccountsService(db)
 
 	sdkhttp.Server = sdkhttp.NewServer(
 		idempotencyService,
+		accountsService,
 	)
 
 	// setup individual workers
