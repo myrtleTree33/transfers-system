@@ -64,6 +64,10 @@ func (s *AccountsService) SubtractBalance(c context.Context, accountID string, a
 		return nil, err
 	}
 
+	if account == nil {
+		return nil, errors.New("account not found")
+	}
+
 	newBalance := account.Balance - amount
 	if newBalance < 0 {
 		return nil, errors.New("insufficient balance")
@@ -82,6 +86,10 @@ func (s *AccountsService) AddBalance(c context.Context, accountID string, amount
 	account, err := s.GetByID(c, accountID)
 	if err != nil {
 		return nil, err
+	}
+
+	if account == nil {
+		return nil, errors.New("account not found")
 	}
 
 	newBalance := account.Balance + amount

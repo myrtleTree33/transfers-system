@@ -215,8 +215,8 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "This is an http-request collection of Transfers System.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	LeftDelim:        "{{",
-	RightDelim:       "}}",
+	// LeftDelim:        "{{",
+	// RightDelim:       "}}",
 }
 
 func init() {
