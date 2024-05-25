@@ -4,7 +4,7 @@ default:
 
 launch:
 # Install dependencies
-	(cd ./backend && go get ./... && go mod tidy)
+	(cd ./backend && go get ./... && go mod tidy && go generate ./...)
 # Bring up the docker containers
 	make down
 	make up
