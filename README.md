@@ -1,6 +1,5 @@
 # Daytwo Template Starter
 
-
 ## Documentation
 
 You should have purchased a license for this template. If you have not, please visit [Daytwo](https://daytwo.io) to purchase a license.
