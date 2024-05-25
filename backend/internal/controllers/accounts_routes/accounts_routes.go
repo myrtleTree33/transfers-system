@@ -48,3 +48,36 @@ func CreateAccountByID(c *gin.Context) {
 
 	c.JSON(http.StatusOK, res)
 }
+
+func GetAccountByID(c *gin.Context) {
+	accountId := c.Param("account_id")
+
+	// Get account
+	account, err := sdkhttp.Server.AccountsService.GetByID(c, accountId)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, dto.GetAccountResDto{
+			BaseReply: controller_models.BaseReply{
+				FailureCode: models.FailureCodeServiceFailed,
+				Error:       err.Error(),
+			},
+		})
+		return
+	}
+
+	if account == nil {
+		c.JSON(http.StatusNotFound, dto.GetAccountResDto{
+			BaseReply: controller_models.BaseReply{
+				FailureCode: models.FailureCodeNotFound,
+				Error:       "account not found",
+			},
+		})
+		return
+	}
+
+	res := dto.GetAccountResDto{
+		AccountId: account.AccountID,
+		Balance:   account.Balance,
+	}
+
+	c.JSON(http.StatusOK, res)
+}

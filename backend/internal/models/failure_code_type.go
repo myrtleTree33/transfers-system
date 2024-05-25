@@ -7,6 +7,7 @@ type FailureCodeType int
 const (
 	FailureCodeNil FailureCodeType = iota // FailureCode
 	FailureCodeParseRequest
+	FailureCodeNotFound
 	FailureCodeCreateResponse
 	FailureCodeServiceFailed
 	FailureCodeCreateUser

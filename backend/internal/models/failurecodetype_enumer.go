@@ -9,11 +9,11 @@ import (
 	"strings"
 )
 
-const _FailureCodeTypeName = "parse_requestcreate_responseservice_failedcreate_userpayment_method_not_foundinvalid_partner_config"
+const _FailureCodeTypeName = "parse_requestnot_foundcreate_responseservice_failedcreate_userpayment_method_not_foundinvalid_partner_config"
 
-var _FailureCodeTypeIndex = [...]uint8{0, 0, 13, 28, 42, 53, 77, 99}
+var _FailureCodeTypeIndex = [...]uint8{0, 0, 13, 22, 37, 51, 62, 86, 108}
 
-const _FailureCodeTypeLowerName = "parse_requestcreate_responseservice_failedcreate_userpayment_method_not_foundinvalid_partner_config"
+const _FailureCodeTypeLowerName = "parse_requestnot_foundcreate_responseservice_failedcreate_userpayment_method_not_foundinvalid_partner_config"
 
 func (i FailureCodeType) String() string {
 	if i < 0 || i >= FailureCodeType(len(_FailureCodeTypeIndex)-1) {
@@ -28,40 +28,44 @@ func _FailureCodeTypeNoOp() {
 	var x [1]struct{}
 	_ = x[FailureCodeNil-(0)]
 	_ = x[FailureCodeParseRequest-(1)]
-	_ = x[FailureCodeCreateResponse-(2)]
-	_ = x[FailureCodeServiceFailed-(3)]
-	_ = x[FailureCodeCreateUser-(4)]
-	_ = x[FailureCodePaymentMethodNotFound-(5)]
-	_ = x[FailureCodeInvalidPartnerConfig-(6)]
+	_ = x[FailureCodeNotFound-(2)]
+	_ = x[FailureCodeCreateResponse-(3)]
+	_ = x[FailureCodeServiceFailed-(4)]
+	_ = x[FailureCodeCreateUser-(5)]
+	_ = x[FailureCodePaymentMethodNotFound-(6)]
+	_ = x[FailureCodeInvalidPartnerConfig-(7)]
 }
 
-var _FailureCodeTypeValues = []FailureCodeType{FailureCodeNil, FailureCodeParseRequest, FailureCodeCreateResponse, FailureCodeServiceFailed, FailureCodeCreateUser, FailureCodePaymentMethodNotFound, FailureCodeInvalidPartnerConfig}
+var _FailureCodeTypeValues = []FailureCodeType{FailureCodeNil, FailureCodeParseRequest, FailureCodeNotFound, FailureCodeCreateResponse, FailureCodeServiceFailed, FailureCodeCreateUser, FailureCodePaymentMethodNotFound, FailureCodeInvalidPartnerConfig}
 
 var _FailureCodeTypeNameToValueMap = map[string]FailureCodeType{
-	_FailureCodeTypeName[0:0]:        FailureCodeNil,
-	_FailureCodeTypeLowerName[0:0]:   FailureCodeNil,
-	_FailureCodeTypeName[0:13]:       FailureCodeParseRequest,
-	_FailureCodeTypeLowerName[0:13]:  FailureCodeParseRequest,
-	_FailureCodeTypeName[13:28]:      FailureCodeCreateResponse,
-	_FailureCodeTypeLowerName[13:28]: FailureCodeCreateResponse,
-	_FailureCodeTypeName[28:42]:      FailureCodeServiceFailed,
-	_FailureCodeTypeLowerName[28:42]: FailureCodeServiceFailed,
-	_FailureCodeTypeName[42:53]:      FailureCodeCreateUser,
-	_FailureCodeTypeLowerName[42:53]: FailureCodeCreateUser,
-	_FailureCodeTypeName[53:77]:      FailureCodePaymentMethodNotFound,
-	_FailureCodeTypeLowerName[53:77]: FailureCodePaymentMethodNotFound,
-	_FailureCodeTypeName[77:99]:      FailureCodeInvalidPartnerConfig,
-	_FailureCodeTypeLowerName[77:99]: FailureCodeInvalidPartnerConfig,
+	_FailureCodeTypeName[0:0]:         FailureCodeNil,
+	_FailureCodeTypeLowerName[0:0]:    FailureCodeNil,
+	_FailureCodeTypeName[0:13]:        FailureCodeParseRequest,
+	_FailureCodeTypeLowerName[0:13]:   FailureCodeParseRequest,
+	_FailureCodeTypeName[13:22]:       FailureCodeNotFound,
+	_FailureCodeTypeLowerName[13:22]:  FailureCodeNotFound,
+	_FailureCodeTypeName[22:37]:       FailureCodeCreateResponse,
+	_FailureCodeTypeLowerName[22:37]:  FailureCodeCreateResponse,
+	_FailureCodeTypeName[37:51]:       FailureCodeServiceFailed,
+	_FailureCodeTypeLowerName[37:51]:  FailureCodeServiceFailed,
+	_FailureCodeTypeName[51:62]:       FailureCodeCreateUser,
+	_FailureCodeTypeLowerName[51:62]:  FailureCodeCreateUser,
+	_FailureCodeTypeName[62:86]:       FailureCodePaymentMethodNotFound,
+	_FailureCodeTypeLowerName[62:86]:  FailureCodePaymentMethodNotFound,
+	_FailureCodeTypeName[86:108]:      FailureCodeInvalidPartnerConfig,
+	_FailureCodeTypeLowerName[86:108]: FailureCodeInvalidPartnerConfig,
 }
 
 var _FailureCodeTypeNames = []string{
 	_FailureCodeTypeName[0:0],
 	_FailureCodeTypeName[0:13],
-	_FailureCodeTypeName[13:28],
-	_FailureCodeTypeName[28:42],
-	_FailureCodeTypeName[42:53],
-	_FailureCodeTypeName[53:77],
-	_FailureCodeTypeName[77:99],
+	_FailureCodeTypeName[13:22],
+	_FailureCodeTypeName[22:37],
+	_FailureCodeTypeName[37:51],
+	_FailureCodeTypeName[51:62],
+	_FailureCodeTypeName[62:86],
+	_FailureCodeTypeName[86:108],
 }
 
 // FailureCodeTypeString retrieves an enum value from the enum constants string name.

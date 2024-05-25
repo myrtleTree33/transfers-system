@@ -116,6 +116,9 @@ func initHandler(server *sdkhttp.IServer) *gin.Engine {
 			accounts.POST("/",
 				accounts_routes.CreateAccountByID,
 			)
+			accounts.GET("/:account_id",
+				accounts_routes.GetAccountByID,
+			)
 		}
 	}
 
