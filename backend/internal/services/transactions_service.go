@@ -9,16 +9,19 @@ import (
 	"gorm.io/gorm"
 )
 
+// ITransactionsService is the interface for the transactions service
 type ITransactionsService interface {
 	Create(c context.Context, Transaction models.Transaction) (*models.Transaction, error)
 	GetByID(c context.Context, transactionID ksuid.KSUID) (*models.Transaction, error)
 }
 
+// TransactionsService is the service that handles transaction operations
 type TransactionsService struct {
 	db              *gorm.DB
 	accountsService IAccountsService
 }
 
+// NewTransactionsService creates a new TransactionsService
 func NewTransactionsService(db *gorm.DB, accountsService IAccountsService) ITransactionsService {
 	return &TransactionsService{
 		db:              db,
@@ -26,6 +29,7 @@ func NewTransactionsService(db *gorm.DB, accountsService IAccountsService) ITran
 	}
 }
 
+// Create creates a new transaction
 func (s *TransactionsService) Create(c context.Context, transaction models.Transaction) (*models.Transaction, error) {
 	// Subtract balance from source account first
 	// If the source account does not have enough balance, return an error
@@ -51,6 +55,7 @@ func (s *TransactionsService) Create(c context.Context, transaction models.Trans
 	return createdTransaction, nil
 }
 
+// GetByID retrieves a transaction by its ID
 func (s *TransactionsService) GetByID(c context.Context, transactionID ksuid.KSUID) (*models.Transaction, error) {
 	transaction := &models.Transaction{}
 	if err := s.db.Where("id = ?", transactionID).First(&transaction).Error; err != nil {

@@ -12,6 +12,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// IIdempotencyService is the interface for the idempotency service
 type IIdempotencyService interface {
 	CreateOne(idempotency *models.Idempotency) error
 	GetByKeyHash(keyHash string) (*models.Idempotency, error)
@@ -19,16 +20,19 @@ type IIdempotencyService interface {
 	GenKeyHash(c *gin.Context) (string, error)
 }
 
+// IdempotencyService is the service that handles idempotency operations
 type IdempotencyService struct {
 	db *gorm.DB
 }
 
+// NewIdempotencyService creates a new IdempotencyService
 func NewIdempotencyService(db *gorm.DB) IIdempotencyService {
 	return &IdempotencyService{
 		db: db,
 	}
 }
 
+// CreateOne creates a new idempotency record
 func (s *IdempotencyService) CreateOne(idempotency *models.Idempotency) error {
 	err := s.db.Create(idempotency).Error
 	if err != nil {
@@ -37,6 +41,7 @@ func (s *IdempotencyService) CreateOne(idempotency *models.Idempotency) error {
 	return nil
 }
 
+// GetByKeyHash retrieves an idempotency record by its key hash
 func (s *IdempotencyService) GetByKeyHash(keyHash string) (*models.Idempotency, error) {
 	found := &models.Idempotency{}
 	err := s.db.Model(models.Idempotency{}).Where("key_hash = ?", keyHash).First(found).Error
@@ -49,6 +54,7 @@ func (s *IdempotencyService) GetByKeyHash(keyHash string) (*models.Idempotency, 
 	return found, nil
 }
 
+// UpdateOneByID updates an idempotency record by its ID
 func (s *IdempotencyService) UpdateOneByID(updated *models.Idempotency) (*models.Idempotency, error) {
 	err := s.db.Model(models.Idempotency{}).Where("id = ?", updated.ID).Updates(&updated).Error
 	if err != nil {
@@ -57,6 +63,7 @@ func (s *IdempotencyService) UpdateOneByID(updated *models.Idempotency) (*models
 	return updated, nil
 }
 
+// GenKeyHash generates a key hash for an idempotency record
 func (s *IdempotencyService) GenKeyHash(c *gin.Context) (string, error) {
 	// Deep copy request body
 	requestBodyBytes, err := io.ReadAll(c.Request.Body)

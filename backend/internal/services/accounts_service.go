@@ -16,14 +16,17 @@ type IAccountsService interface {
 	AddBalance(c context.Context, accountID string, amount float64) (*models.Account, error)
 }
 
+// AccountsService is a service that handles account operations
 type AccountsService struct {
 	db *gorm.DB
 }
 
+// NewAccountsService creates a new AccountsService
 func NewAccountsService(db *gorm.DB) IAccountsService {
 	return &AccountsService{db: db}
 }
 
+// Create creates a new account
 func (s *AccountsService) Create(c context.Context, account models.Account) (*models.Account, error) {
 	if account.Balance < 0 {
 		return nil, errors.New("balance cannot be negative")
@@ -41,6 +44,7 @@ func (s *AccountsService) Create(c context.Context, account models.Account) (*mo
 	return createdAccount, nil
 }
 
+// GetByID retrieves an account by its ID
 func (s *AccountsService) GetByID(c context.Context, accountID string) (*models.Account, error) {
 	account := &models.Account{}
 	if err := s.db.Where("account_id = ?", accountID).First(&account).Error; err != nil {
@@ -53,6 +57,7 @@ func (s *AccountsService) GetByID(c context.Context, accountID string) (*models.
 	return account, nil
 }
 
+// SubtractBalance subtracts an amount from an account's balance
 func (s *AccountsService) SubtractBalance(c context.Context, accountID string, amount float64) (*models.Account, error) {
 	account, err := s.GetByID(c, accountID)
 	if err != nil {
@@ -72,6 +77,7 @@ func (s *AccountsService) SubtractBalance(c context.Context, accountID string, a
 	return updatedAccount, nil
 }
 
+// AddBalance adds an amount to an account's balance
 func (s *AccountsService) AddBalance(c context.Context, accountID string, amount float64) (*models.Account, error) {
 	account, err := s.GetByID(c, accountID)
 	if err != nil {
@@ -91,6 +97,7 @@ func (s *AccountsService) AddBalance(c context.Context, accountID string, amount
 	return updatedAccount, nil
 }
 
+// updateBalance updates an account's balance
 func (s *AccountsService) updateBalance(c context.Context, accountID string, balance float64) (*models.Account, error) {
 	if err := s.db.Model(&models.Account{}).Where("account_id = ?", accountID).Update("balance", balance).Error; err != nil {
 		return nil, err

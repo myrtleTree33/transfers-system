@@ -10,6 +10,7 @@ type IServer struct {
 	// ...
 }
 
+// NewServer creates a new server
 func NewServer(
 	idempotencyService services.IIdempotencyService,
 	accountsService services.IAccountsService,
