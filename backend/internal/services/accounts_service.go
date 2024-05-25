@@ -8,6 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
+//go:generate mockery --name=IAccountsService
 type IAccountsService interface {
 	Create(c context.Context, account models.Account) (*models.Account, error)
 	GetByID(c context.Context, accountID string) (*models.Account, error)
@@ -24,6 +25,10 @@ func NewAccountsService(db *gorm.DB) IAccountsService {
 }
 
 func (s *AccountsService) Create(c context.Context, account models.Account) (*models.Account, error) {
+	if account.Balance < 0 {
+		return nil, errors.New("balance cannot be negative")
+	}
+
 	if err := s.db.Create(&account).Error; err != nil {
 		return nil, err
 	}
