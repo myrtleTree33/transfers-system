@@ -26,4 +26,3 @@ down:
 
 run-dev:
 	(cd backend && air)
-
