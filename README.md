@@ -71,7 +71,42 @@ cd backend/
 go run ./cmd/goosecli up
 ```
 
+## Edge cases handled
 
+The following edge cases are handled in the application:
+
+### Duplicate transfers / idempotency
+
+Create and update operations are idempotent. If a transfer with the same ID is created or updated multiple times, the operation will only be performed once.
+
+This is enforced by the middleware that checks for the existence of a transfer with the same ID in the database before creating or updating the transfer.  A HTTP header "idempotency-key" is used to identify the transfer.
+
+The process works as follows:
+
+1. Store the request in an idempotency table with the idempotency key + hash of the request data as the primary key.
+2. Check if the request has already been processed by looking up the idempotency key in the idempotency table.
+3. If the request has already been processed, return the response from the previous request.
+4. If the request has not been processed, process the request and store the response in the idempotency table.
+5. Return the response to the client.
+
+#### Example of enforcing idempotency
+
+For future requests, include the middleware in the request to check for idempotency: https://github.com/myrtleTree33/transfers-system/blob/747f692d3eb0ea77476f0a475eceedae1736697f/backend/main.go#L112-L115
+
+
+Next, reply with the wrapped function which stores the response in the database: https://github.com/myrtleTree33/transfers-system/blob/747f692d3eb0ea77476f0a475eceedae1736697f/backend/internal/controllers/accounts_routes.go#L54
+
+### Insufficient funds
+
+If a transfer is created with an amount that exceeds the balance of the source account, the transfer will not be created and an error message will be returned.
+
+### Negative transfer amounts
+
+If a transfer is created with a negative amount, the transfer will not be created and an error message will be returned.
+
+### Invalid account IDs
+
+If a transfer is created with an invalid source or destination account ID, the transfer will not be created and an error message will be returned.
 
 ## Postman collection
 
