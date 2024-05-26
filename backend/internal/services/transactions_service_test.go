@@ -35,9 +35,7 @@ func TestTransactionsService_Create(t *testing.T) {
 	accountsService := &mocks.IAccountsService{}
 	transactionsService := NewTransactionsService(db, accountsService)
 
-	accountsService.On("SubtractBalance", mocklib.Anything, "123", float64(100)).Return(nil, nil)
-
-	accountsService.On("AddBalance", mocklib.Anything, "456", float64(100)).Return(nil, nil)
+	accountsService.On("TransferBalance", mocklib.Anything, "123", "456", float64(100)).Return(nil, nil)
 
 	mock.ExpectBegin()
 	mock.ExpectExec("INSERT .*").
@@ -87,30 +85,7 @@ func TestTransactionsService_AccountBalanceNegative(t *testing.T) {
 	accountsService := &mocks.IAccountsService{}
 	transactionsService := NewTransactionsService(db, accountsService)
 
-	accountsService.On("SubtractBalance", mocklib.Anything, "123", float64(100)).Return(nil, errors.New("negative balance"))
-
-	created, err := transactionsService.Create(
-		context.Background(), models.Transaction{
-			SourceAccountID:      "123",
-			DestinationAccountID: "456",
-			Amount:               100,
-		})
-	assert.NotNil(t, err)
-	assert.Nil(t, created)
-
-	mock.ExpectationsWereMet()
-}
-
-func TestTransactionsService_AccountBalanceCannotAdd(t *testing.T) {
-	sqlDb, mock, db := internal.SetupTestDB()
-	defer sqlDb.Close()
-
-	accountsService := &mocks.IAccountsService{}
-	transactionsService := NewTransactionsService(db, accountsService)
-
-	accountsService.On("SubtractBalance", mocklib.Anything, "123", float64(100)).Return(nil, nil)
-
-	accountsService.On("AddBalance", mocklib.Anything, "456", float64(100)).Return(nil, errors.New("cannot add balance"))
+	accountsService.On("TransferBalance", mocklib.Anything, "123", "456", float64(100)).Return(nil, errors.New("negative balance"))
 
 	created, err := transactionsService.Create(
 		context.Background(), models.Transaction{

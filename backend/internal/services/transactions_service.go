@@ -4,6 +4,7 @@ import (
 	"backend/internal/models"
 	"context"
 	"errors"
+	"fmt"
 
 	"github.com/segmentio/ksuid"
 	"gorm.io/gorm"
@@ -35,16 +36,9 @@ func (s *TransactionsService) Create(c context.Context, transaction models.Trans
 		return nil, errors.New("amount cannot be negative")
 	}
 
-	// Subtract balance from source account first
-	// If the source account does not have enough balance, return an error
-	_, err := s.accountsService.SubtractBalance(c, transaction.SourceAccountID, transaction.Amount)
-	if err != nil {
-		return nil, err
-	}
-
-	_, err = s.accountsService.AddBalance(c, transaction.DestinationAccountID, transaction.Amount)
-	if err != nil {
-		return nil, err
+	// Transfer balance atomically
+	if err := s.accountsService.TransferBalance(c, transaction.SourceAccountID, transaction.DestinationAccountID, transaction.Amount); err != nil {
+		return nil, fmt.Errorf("failed to transfer balance: %w", err)
 	}
 
 	if err := s.db.Create(&transaction).Error; err != nil {

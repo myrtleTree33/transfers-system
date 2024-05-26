@@ -14,36 +14,6 @@ type IAccountsService struct {
 	mock.Mock
 }
 
-// AddBalance provides a mock function with given fields: c, accountID, amount
-func (_m *IAccountsService) AddBalance(c context.Context, accountID string, amount float64) (*models.Account, error) {
-	ret := _m.Called(c, accountID, amount)
-
-	if len(ret) == 0 {
-		panic("no return value specified for AddBalance")
-	}
-
-	var r0 *models.Account
-	var r1 error
-	if rf, ok := ret.Get(0).(func(context.Context, string, float64) (*models.Account, error)); ok {
-		return rf(c, accountID, amount)
-	}
-	if rf, ok := ret.Get(0).(func(context.Context, string, float64) *models.Account); ok {
-		r0 = rf(c, accountID, amount)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*models.Account)
-		}
-	}
-
-	if rf, ok := ret.Get(1).(func(context.Context, string, float64) error); ok {
-		r1 = rf(c, accountID, amount)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
-}
-
 // Create provides a mock function with given fields: c, account
 func (_m *IAccountsService) Create(c context.Context, account models.Account) (*models.Account, error) {
 	ret := _m.Called(c, account)
@@ -104,34 +74,22 @@ func (_m *IAccountsService) GetByID(c context.Context, accountID string) (*model
 	return r0, r1
 }
 
-// SubtractBalance provides a mock function with given fields: c, accountID, amount
-func (_m *IAccountsService) SubtractBalance(c context.Context, accountID string, amount float64) (*models.Account, error) {
-	ret := _m.Called(c, accountID, amount)
+// TransferBalance provides a mock function with given fields: c, fromAccountID, toAccountID, amount
+func (_m *IAccountsService) TransferBalance(c context.Context, fromAccountID string, toAccountID string, amount float64) error {
+	ret := _m.Called(c, fromAccountID, toAccountID, amount)
 
 	if len(ret) == 0 {
-		panic("no return value specified for SubtractBalance")
+		panic("no return value specified for TransferBalance")
 	}
 
-	var r0 *models.Account
-	var r1 error
-	if rf, ok := ret.Get(0).(func(context.Context, string, float64) (*models.Account, error)); ok {
-		return rf(c, accountID, amount)
-	}
-	if rf, ok := ret.Get(0).(func(context.Context, string, float64) *models.Account); ok {
-		r0 = rf(c, accountID, amount)
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, float64) error); ok {
+		r0 = rf(c, fromAccountID, toAccountID, amount)
 	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*models.Account)
-		}
+		r0 = ret.Error(0)
 	}
 
-	if rf, ok := ret.Get(1).(func(context.Context, string, float64) error); ok {
-		r1 = rf(c, accountID, amount)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 // NewIAccountsService creates a new instance of IAccountsService. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.

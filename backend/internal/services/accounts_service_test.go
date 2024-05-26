@@ -131,69 +131,30 @@ func TestAccountsService_GetByUnknownID(t *testing.T) {
 	mock.ExpectationsWereMet()
 }
 
-func TestAccountsService_SubtractBalance(t *testing.T) {
+func TestAccountsService_TransferBalance(t *testing.T) {
 	sqlDb, mock, db := internal.SetupTestDB()
 	defer sqlDb.Close()
-
-	mock.ExpectQuery(
-		"SELECT .*",
-	).WithArgs("123", 1).WillReturnRows(sqlmock.NewRows([]string{"account_id", "balance"}).AddRow("123", 100))
 
 	mock.ExpectBegin()
-	mock.ExpectExec("UPDATE \"accounts\"").WillReturnResult(sqlmock.NewResult(1, 1))
-	mock.ExpectCommit()
-
-	mock.ExpectQuery(
-		"SELECT .*",
-	).WithArgs("123", 1).WillReturnRows(sqlmock.NewRows([]string{"account_id", "balance"}).AddRow("123", 50))
-
-	accountsService := NewAccountsService(db)
-
-	account, err := accountsService.SubtractBalance(context.Background(), "123", 50)
-	assert.Nil(t, err)
-	assert.NotNil(t, account)
-
-	mock.ExpectationsWereMet()
-}
-
-func TestAccountsService_SubtractBalanceInsufficientBalance(t *testing.T) {
-	sqlDb, mock, db := internal.SetupTestDB()
-	defer sqlDb.Close()
 
 	mock.ExpectQuery(
 		"SELECT .*",
 	).WithArgs("123", 1).WillReturnRows(sqlmock.NewRows([]string{"account_id", "balance"}).AddRow("123", 100))
 
-	accountsService := NewAccountsService(db)
-
-	account, err := accountsService.SubtractBalance(context.Background(), "123", 150)
-	assert.NotNil(t, err)
-	assert.Nil(t, account)
-
-	mock.ExpectationsWereMet()
-}
-
-func TestAccountsService_AddBalance(t *testing.T) {
-	sqlDb, mock, db := internal.SetupTestDB()
-	defer sqlDb.Close()
-
 	mock.ExpectQuery(
 		"SELECT .*",
-	).WithArgs("123", 1).WillReturnRows(sqlmock.NewRows([]string{"account_id", "balance"}).AddRow("123", 100))
+	).WithArgs("456", 1).WillReturnRows(sqlmock.NewRows([]string{"account_id", "balance"}).AddRow("456", 100))
 
-	mock.ExpectBegin()
 	mock.ExpectExec("UPDATE \"accounts\"").WillReturnResult(sqlmock.NewResult(1, 1))
+
+	mock.ExpectExec("UPDATE \"accounts\"").WillReturnResult(sqlmock.NewResult(1, 1))
+
 	mock.ExpectCommit()
 
-	mock.ExpectQuery(
-		"SELECT .*",
-	).WithArgs("123", 1).WillReturnRows(sqlmock.NewRows([]string{"account_id", "balance"}).AddRow("123", 150))
-
 	accountsService := NewAccountsService(db)
 
-	account, err := accountsService.AddBalance(context.Background(), "123", 50)
+	err := accountsService.TransferBalance(context.Background(), "123", "456", 5)
 	assert.Nil(t, err)
-	assert.NotNil(t, account)
 
 	mock.ExpectationsWereMet()
 }

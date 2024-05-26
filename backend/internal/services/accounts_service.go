@@ -12,8 +12,7 @@ import (
 type IAccountsService interface {
 	Create(c context.Context, account models.Account) (*models.Account, error)
 	GetByID(c context.Context, accountID string) (*models.Account, error)
-	SubtractBalance(c context.Context, accountID string, amount float64) (*models.Account, error)
-	AddBalance(c context.Context, accountID string, amount float64) (*models.Account, error)
+	TransferBalance(c context.Context, fromAccountID, toAccountID string, amount float64) error
 }
 
 // AccountsService is a service that handles account operations
@@ -57,62 +56,55 @@ func (s *AccountsService) GetByID(c context.Context, accountID string) (*models.
 	return account, nil
 }
 
-// SubtractBalance subtracts an amount from an account's balance
-func (s *AccountsService) SubtractBalance(c context.Context, accountID string, amount float64) (*models.Account, error) {
-	account, err := s.GetByID(c, accountID)
-	if err != nil {
-		return nil, err
-	}
+// TransferBalance transfers an amount from one account to another atomically
+func (s *AccountsService) TransferBalance(c context.Context, fromAccountID, toAccountID string, amount float64) error {
+	// Transaction ensures that the operation is atomic
+	err := s.db.Transaction(func(tx *gorm.DB) error {
+		// Amount must be positive
+		if amount <= 0 {
+			return errors.New("amount must be positive")
+		}
 
-	if account == nil {
-		return nil, errors.New("account not found")
-	}
+		// Retrieve the from account
+		fromAccount := &models.Account{}
+		if err := tx.Where("account_id = ?", fromAccountID).First(&fromAccount).Error; err != nil {
+			return err
+		}
 
-	newBalance := account.Balance - amount
-	if newBalance < 0 {
-		return nil, errors.New("insufficient balance")
-	}
+		// If the from account is not found, return an error
+		if fromAccount == nil {
+			return errors.New("from account not found")
+		}
 
-	updatedAccount, err := s.updateBalance(c, accountID, newBalance)
-	if err != nil {
-		return nil, err
-	}
+		// Retrieve the to account
+		toAccount := &models.Account{}
+		if err := tx.Where("account_id = ?", toAccountID).First(&toAccount).Error; err != nil {
+			return err
+		}
 
-	return updatedAccount, nil
-}
+		// If the to account is not found, return an error
+		if toAccount == nil {
+			return errors.New("to account not found")
+		}
 
-// AddBalance adds an amount to an account's balance
-func (s *AccountsService) AddBalance(c context.Context, accountID string, amount float64) (*models.Account, error) {
-	account, err := s.GetByID(c, accountID)
-	if err != nil {
-		return nil, err
-	}
+		// If the from account has insufficient balance, return an error
+		if fromAccount.Balance < amount {
+			return errors.New("insufficient balance")
+		}
 
-	if account == nil {
-		return nil, errors.New("account not found")
-	}
+		// Update the from account's balance
+		newFromBalance := fromAccount.Balance - amount
+		if err := tx.Model(&models.Account{}).Where("account_id = ?", fromAccountID).Update("balance", newFromBalance).Error; err != nil {
+			return err
+		}
 
-	newBalance := account.Balance + amount
-	if newBalance < 0 {
-		return nil, errors.New("insufficient balance")
-	}
+		// Update the to account's balance
+		newToBalance := toAccount.Balance + amount
+		if err := tx.Model(&models.Account{}).Where("account_id = ?", toAccountID).Update("balance", newToBalance).Error; err != nil {
+			return err
+		}
+		return nil
+	})
 
-	updatedAccount, err := s.updateBalance(c, accountID, newBalance)
-	if err != nil {
-		return nil, err
-	}
-
-	return updatedAccount, nil
-}
-
-// updateBalance updates an account's balance
-func (s *AccountsService) updateBalance(c context.Context, accountID string, balance float64) (*models.Account, error) {
-	if err := s.db.Model(&models.Account{}).Where("account_id = ?", accountID).Update("balance", balance).Error; err != nil {
-		return nil, err
-	}
-	updatedAccount, err := s.GetByID(c, accountID)
-	if err != nil {
-		return nil, err
-	}
-	return updatedAccount, nil
+	return err
 }
